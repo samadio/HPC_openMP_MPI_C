@@ -1,0 +1,94 @@
+Weak scalability_test, base size=10^9
+np=1
+--------------------------------------------------------------------------
+mpirun was unable to launch the specified application as it could not access
+or execute an executable:
+
+Executable: ./parallel.x
+Node: cn04-16
+
+while attempting to start process rank 0.
+--------------------------------------------------------------------------
+------------------------------------------------
+np=2
+--------------------------------------------------------------------------
+mpirun was unable to launch the specified application as it could not access
+or execute an executable:
+
+Executable: ./parallel.x
+Node: cn04-16
+
+while attempting to start process rank 0.
+--------------------------------------------------------------------------
+2 total processes failed to start
+------------------------------------------------
+np=4
+--------------------------------------------------------------------------
+mpirun was unable to launch the specified application as it could not access
+or execute an executable:
+
+Executable: ./parallel.x
+Node: cn04-16
+
+while attempting to start process rank 0.
+--------------------------------------------------------------------------
+4 total processes failed to start
+------------------------------------------------
+np=8
+--------------------------------------------------------------------------
+mpirun was unable to launch the specified application as it could not access
+or execute an executable:
+
+Executable: ./parallel.x
+Node: cn04-16
+
+while attempting to start process rank 0.
+--------------------------------------------------------------------------
+8 total processes failed to start
+------------------------------------------------
+np=16
+--------------------------------------------------------------------------
+mpirun was unable to launch the specified application as it could not access
+or execute an executable:
+
+Executable: ./parallel.x
+Node: cn04-16
+
+while attempting to start process rank 0.
+--------------------------------------------------------------------------
+16 total processes failed to start
+------------------------------------------------
+np=20
+--------------------------------------------------------------------------
+mpirun was unable to launch the specified application as it could not access
+or execute an executable:
+
+Executable: ./parallel.x
+Node: cn04-16
+
+while attempting to start process rank 0.
+--------------------------------------------------------------------------
+20 total processes failed to start
+------------------------------------------------
+np=32
+--------------------------------------------------------------------------
+There are not enough slots available in the system to satisfy the 32 slots 
+that were requested by the application:
+  ./parallel.x
+
+Either request fewer slots for your application, or make more slots available
+for use.
+--------------------------------------------------------------------------
+------------------------------------------------
+np=64
+--------------------------------------------------------------------------
+There are not enough slots available in the system to satisfy the 64 slots 
+that were requested by the application:
+  ./parallel.x
+
+Either request fewer slots for your application, or make more slots available
+for use.
+--------------------------------------------------------------------------
+------------------------------------------------
+cn04-16 : flushing filesystem cache...
+cn04-16 : filesystem cache flushed
