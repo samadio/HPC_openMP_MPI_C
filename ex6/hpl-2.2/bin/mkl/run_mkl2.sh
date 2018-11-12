@@ -18,6 +18,10 @@ echo "--------------------------------------------------------------------------
 echo "               NOW THE INTEL ONE	            "
 echo "       "
 echo "   "
+echo " "
+echo " "
+echo " "
+echo " "
 
 #now the intel
 
