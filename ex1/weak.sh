@@ -6,4 +6,9 @@ for procs in 1 2 4 8 16 20; do
  /usr/bin/time mpirun -np ${procs} ./parallel.x 1000000000
  echo "------------------------------------------------"
  done
+<<<<<<< HEAD
+ 
+ #this is weak because in input there's 10^9 and the C program uses 10^9 * np, so the size of the problem increases along with the number of processors
+=======
 
+>>>>>>> 2609350ff88abcac7ad35a67fc8d0f6174ac6adf
