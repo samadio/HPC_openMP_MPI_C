@@ -1,0 +1,38 @@
+cn08-03
+Intel(R) Optimized LINPACK Benchmark data
+
+Current date/time: Mon Nov 12 22:53:12 2018
+
+CPU frequency:    3.599 GHz
+Number of CPUs: 2
+Number of cores: 20
+Number of threads: 20
+
+Parameters are set to:
+
+Number of tests: 2
+Number of equations to solve (problem size) : 64512 64512
+Leading dimension of array                  : 64512 64512
+Number of trials to run                     : 1     1    
+Data alignment value (in Kbytes)            : 1     1    
+
+Maximum memory requested that can be used=33295676416, at the size=64512
+
+=================== Timing linear equation system solver ===================
+
+Size   LDA    Align. Time(s)    GFlops   Residual     Residual(norm) Check
+64512  64512  1      411.097    435.4177 3.487971e-09 2.991503e-02   pass
+64512  64512  1      410.428    436.1273 3.487971e-09 2.991503e-02   pass
+
+Performance Summary (GFlops)
+
+Size   LDA    Align.  Average  Maximal
+64512  64512  1       435.4177 435.4177
+64512  64512  1       436.1273 436.1273
+
+Residual checks PASSED
+
+End of tests
+
+cn08-03 : flushing filesystem cache...
+cn08-03 : filesystem cache flushed
