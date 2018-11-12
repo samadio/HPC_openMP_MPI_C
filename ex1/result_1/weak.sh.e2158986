@@ -1,0 +1,9 @@
+20.71user 0.08system 0:21.20elapsed 98%CPU (0avgtext+0avgdata 103088maxresident)k
+15960inputs+8outputs (45major+8899minor)pagefaults 0swaps
+42.62user 0.10system 0:21.67elapsed 197%CPU (0avgtext+0avgdata 111312maxresident)k
+0inputs+16outputs (0major+14881minor)pagefaults 0swaps
+95.71user 0.26system 0:26.79elapsed 358%CPU (0avgtext+0avgdata 109856maxresident)k
+0inputs+24outputs (0major+26759minor)pagefaults 0swaps
+181.03user 0.34system 0:23.12elapsed 784%CPU (0avgtext+0avgdata 110544maxresident)k
+0inputs+16outputs (0major+50139minor)pagefaults 0swaps
+=>> PBS: job killed: walltime 100 exceeded limit 60
