@@ -1,14 +1,11 @@
 cd hpc/ex1/
-echo "Weak scalability_test, base size=1000000000" 		#$1 indica il primo parametro, che metti dopo il .x
+echo "Weak scalability_test, base size=10^9" 		#$1 indica il primo parametro, che metti dopo il .x
+module load openmpi
 for procs in 1 2 4 8 16 20; do
-# sync; echo 3 > /proc/sys/vm/drop_caches  
- echo "np=${procs}" 		
- /usr/bin/time mpirun -np ${procs} ./parallel.x 1000000000
- echo "------------------------------------------------"
+# sync; echo 3 > /proc/sys/vm/drop_caches 
+ echo "np=${procs}"
+ /usr/bin/time mpirun -np ${procs} ./parallel.x 1000000000 | grep "walltime" | cut -d ' ' -f 8 >> weaktime
+ echo "------------------------------------------------" 
  done
-<<<<<<< HEAD
- 
- #this is weak because in input there's 10^9 and the C program uses 10^9 * np, so the size of the problem increases along with the number of processors
-=======
 
->>>>>>> 2609350ff88abcac7ad35a67fc8d0f6174ac6adf
+ #this is weak because in input there's 10^9 and the C program uses 10^9 * np, so the size of the problem increases along with the number of processors
