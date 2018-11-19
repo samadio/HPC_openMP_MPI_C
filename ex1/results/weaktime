@@ -1,7 +1,7 @@
-19.62341309
-20.20404887
-20.20285702
-21.69367003
-22.76729894
-22.79756904
+1 19.62341309
+2 20.20404887
+4 20.20285702
+8 21.69367003
+16 22.76729894
+20 22.79756904
 #aumenta perchè c'è message passing, ma sono trascurabili: il numero di message passed al master processor cresce con n
