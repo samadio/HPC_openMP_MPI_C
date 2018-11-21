@@ -8,4 +8,4 @@ for procs in 1 2 4 8 16 20; do
  echo "------------------------------------------------" 
  done
 
- #this is weak because in input there's 10^9 and the C program uses 10^9 * np, so the size of the problem increases along with the number of processors
+#this is weak because in input there's 10^9 and the C program uses 10^9 * np, so the size of the problem increases along with the number of processors
