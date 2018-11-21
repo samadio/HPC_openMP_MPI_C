@@ -1,0 +1,8 @@
+
+xhpl:13164 terminated with signal 11 at PC=7f5feaa00565 SP=7ffeb4b0e200.  Backtrace:
+/u/shared/programs/x86_64//openmpi/1.8.3/intel/14.0/torque/lib/libopen-pal.so.6(opal_memory_ptmalloc2_int_malloc+0xee5)[0x7f5feaa00565]
+/u/shared/programs/x86_64//openmpi/1.8.3/intel/14.0/torque/lib/libopen-pal.so.6(opal_memory_ptmalloc2_malloc+0x58)[0x7f5feaa023a8]
+./xhpl[0x418e90]
+./xhpl[0x41447d]
+/lib64/libc.so.6(__libc_start_main+0xfd)[0x327a21ed1d]
+./xhpl[0x413c29]
