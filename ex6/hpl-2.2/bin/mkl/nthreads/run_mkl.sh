@@ -13,7 +13,7 @@ for nproc in 1 2 4 5 10 20; do
 echo "nproc=${nproc}"
 echo " "
 echo " "
-mem=$((64512*20/nproc));
+mem=$((64512*nproc/20));
 
 P=1
 #setting P (and Q)for every number of processes
