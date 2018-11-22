@@ -13,7 +13,9 @@ for nproc in 1 2 4 5 10 20; do
 echo "nproc=${nproc}"
 echo " "
 echo " "
-mem=$((64512*nproc/20));
+
+export OMP_NUM_THREADS=$((20/nproc));
+mem=$((64512));
 
 P=1
 #setting P (and Q)for every number of processes
@@ -59,7 +61,6 @@ echo "-----------------------------------------------------------"
 echo " "
 echo " "
 
-export OMP_NUM_THREADS=$((20/nproc));
 mpirun -np ${nproc} ./xhpl
 done
 exit
