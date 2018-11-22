@@ -9,7 +9,7 @@ module load mkl
 module load openmpi/1.8.3/intel/14.0
 
 #run the code
-for nproc in 1 2 4 5 10 20; do
+for nproc in 10 20; do
 echo "nproc=${nproc}"
 echo " "
 echo " "
