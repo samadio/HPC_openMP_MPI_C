@@ -14,7 +14,8 @@ echo "nproc=${nproc}"
 echo " "
 echo " "
 
-export OMP_NUM_THREADS=$((20/nproc));
+export OMP_NUM_THREADS=2 #$((20/nproc));
+#omp_set_num_threads(2) #$((20/nproc))
 mem=$((64512));
 
 P=1
