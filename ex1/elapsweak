@@ -1,0 +1,89 @@
+
+ # of trials = 1000000000 , estimate of pi is 3.141608392 
+
+ # walltime on master processor : 19.60113192 
+20.73user 0.08system 0:21.21elapsed 98%CPU (0avgtext+0avgdata 103120maxresident)k
+15024inputs+16outputs (44major+8907minor)pagefaults 0swaps
+ Processor 1 sending results = 785384978 to master process 
+
+ # of trials = 2000000000 , estimate of pi is 3.141574152 
+
+ # walltime on master processor : 20.35423088 
+43.00user 0.09system 0:21.86elapsed 197%CPU (0avgtext+0avgdata 103312maxresident)k
+0inputs+8outputs (0major+14883minor)pagefaults 0swaps
+ Processor 2 sending results = 785398370 to master process 
+ Processor 3 sending results = 785405979 to master process 
+
+ # of trials = 4000000000 , estimate of pi is 3.141591425 
+
+ # walltime on master processor : 20.20668602 
+ Processor 1 sending results = 785384978 to master process 
+85.40user 0.17system 0:21.74elapsed 393%CPU (0avgtext+0avgdata 111440maxresident)k
+0inputs+16outputs (0major+26759minor)pagefaults 0swaps
+ Processor 4 sending results = 785391550 to master process 
+ Processor 6 sending results = 785403493 to master process 
+ Processor 5 sending results = 785393909 to master process 
+ Processor 2 sending results = 785398370 to master process 
+ Processor 1 sending results = 785384978 to master process 
+
+ # of trials = 8000000000 , estimate of pi is 3.141586694 
+
+ # walltime on master processor : 21.43298793 
+ Processor 3 sending results = 785405979 to master process 
+ Processor 7 sending results = 785393012 to master process 
+180.59user 0.42system 0:23.05elapsed 785%CPU (0avgtext+0avgdata 106080maxresident)k
+0inputs+8outputs (0major+50664minor)pagefaults 0swaps
+ Processor 4 sending results = 785391550 to master process 
+ Processor 7 sending results = 785393012 to master process 
+ Processor 6 sending results = 785403493 to master process 
+ Processor 14 sending results = 785412956 to master process 
+ Processor 11 sending results = 785403739 to master process 
+ Processor 13 sending results = 785404848 to master process 
+ Processor 5 sending results = 785393909 to master process 
+ Processor 15 sending results = 785383658 to master process 
+ Processor 3 sending results = 785405979 to master process 
+ Processor 1 sending results = 785384978 to master process 
+ Processor 9 sending results = 785379559 to master process 
+ Processor 12 sending results = 785403842 to master process 
+ Processor 8 sending results = 785399122 to master process 
+ Processor 2 sending results = 785398370 to master process 
+
+ # of trials = 16000000000 , estimate of pi is 3.141588968 
+
+ # walltime on master processor : 23.57021809 
+ Processor 10 sending results = 785394759 to master process 
+385.56user 0.73system 0:25.29elapsed 1527%CPU (0avgtext+0avgdata 109760maxresident)k
+0inputs+16outputs (0major+98802minor)pagefaults 0swaps
+cn02-03.7045ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn02-03.7048ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn02-03.7046ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn02-03.7047ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn02-03.7070ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn02-03.7074ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn02-03.7072ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn02-03.7075ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+ Processor 1 sending results = 785384978 to master process 
+ Processor 5 sending results = 785393909 to master process 
+ Processor 17 sending results = 785394378 to master process 
+ Processor 13 sending results = 785404848 to master process 
+ Processor 11 sending results = 785403739 to master process 
+ Processor 6 sending results = 785403493 to master process 
+ Processor 3 sending results = 785405979 to master process 
+ Processor 4 sending results = 785391550 to master process 
+ Processor 2 sending results = 785398370 to master process 
+ Processor 16 sending results = 785389505 to master process 
+ Processor 10 sending results = 785394759 to master process 
+ Processor 12 sending results = 785403842 to master process 
+ Processor 9 sending results = 785379559 to master process 
+ Processor 18 sending results = 785391824 to master process 
+ Processor 8 sending results = 785399122 to master process 
+ Processor 14 sending results = 785412956 to master process 
+ Processor 15 sending results = 785383658 to master process 
+ Processor 7 sending results = 785393012 to master process 
+ Processor 19 sending results = 785405592 to master process 
+
+ # of trials = 20000000000 , estimate of pi is 3.141587434 
+
+ # walltime on master processor : 22.91595697 
+479.45user 0.92system 0:24.69elapsed 1945%CPU (0avgtext+0avgdata 145840maxresident)k
+0inputs+16outputs (0major+141156minor)pagefaults 0swaps
