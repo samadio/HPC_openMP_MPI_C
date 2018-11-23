@@ -45,9 +45,11 @@ case $nproc in
 esac
 
 Q=$((nproc/P));
-#sed -i -e '6 s/*/'${mem}'       Ns/' HPL.dat
+
+#replace the N line
 
 sed -i '6 c '${mem}'         Ns' HPL.dat
+
 #replace P and Q line:
 
 sed -i '11 c '${P}'         Ps' HPL.dat
