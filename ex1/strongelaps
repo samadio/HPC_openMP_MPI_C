@@ -1,0 +1,77 @@
+
+ # of trials = 100000000 , estimate of pi is 3.141608760 
+
+ # walltime on master processor : 1.96075916 
+ Processor 1 sending results = 39267768 to master process 
+
+ # of trials = 100000000 , estimate of pi is 3.141402760 
+
+ # walltime on master processor : 1.00960398 
+ Processor 2 sending results = 19632711 to master process 
+ Processor 1 sending results = 19632695 to master process 
+ Processor 3 sending results = 19634467 to master process 
+
+ # of trials = 100000000 , estimate of pi is 3.141421160 
+
+ # walltime on master processor : 0.50578785 
+ Processor 2 sending results = 9816262 to master process 
+ Processor 6 sending results = 9814731 to master process 
+ Processor 4 sending results = 9818354 to master process 
+ Processor 5 sending results = 9818911 to master process 
+ Processor 1 sending results = 9818218 to master process 
+ Processor 3 sending results = 9817959 to master process 
+
+ # of trials = 100000000 , estimate of pi is 3.141582880 
+
+ # walltime on master processor : 0.27036190 
+ Processor 7 sending results = 9817696 to master process 
+ Processor 4 sending results = 4907982 to master process 
+ Processor 5 sending results = 4910131 to master process 
+ Processor 6 sending results = 4908087 to master process 
+ Processor 7 sending results = 4907687 to master process 
+ Processor 11 sending results = 4908835 to master process 
+ Processor 13 sending results = 4908566 to master process 
+ Processor 8 sending results = 4907327 to master process 
+ Processor 12 sending results = 4908713 to master process 
+ Processor 3 sending results = 4910461 to master process 
+ Processor 15 sending results = 4907614 to master process 
+ Processor 10 sending results = 4907674 to master process 
+ Processor 14 sending results = 4907899 to master process 
+ Processor 2 sending results = 4908519 to master process 
+ Processor 9 sending results = 4908151 to master process 
+ Processor 1 sending results = 4908653 to master process 
+
+ # of trials = 100000000 , estimate of pi is 3.141336520 
+
+ # walltime on master processor : 0.14913702 
+cn01-20.15080ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn01-20.15081ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn01-20.15082ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn01-20.15083ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn01-20.15099ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn01-20.15101ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn01-20.15102ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn01-20.15103ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+ Processor 5 sending results = 3927483 to master process 
+ Processor 9 sending results = 3926740 to master process 
+ Processor 11 sending results = 3927024 to master process 
+ Processor 13 sending results = 3926722 to master process 
+ Processor 8 sending results = 3925650 to master process 
+ Processor 10 sending results = 3926788 to master process 
+ Processor 1 sending results = 3926423 to master process 
+ Processor 4 sending results = 3926553 to master process 
+ Processor 2 sending results = 3927462 to master process 
+ Processor 15 sending results = 3926338 to master process 
+ Processor 14 sending results = 3926770 to master process 
+ Processor 18 sending results = 3927257 to master process 
+ Processor 6 sending results = 3926757 to master process 
+ Processor 3 sending results = 3928580 to master process 
+ Processor 16 sending results = 3926618 to master process 
+ Processor 7 sending results = 3925623 to master process 
+ Processor 12 sending results = 3926828 to master process 
+ Processor 17 sending results = 3927640 to master process 
+
+ # of trials = 100000000 , estimate of pi is 3.141420680 
+
+ # walltime on master processor : 0.11622405 
+ Processor 19 sending results = 3926429 to master process 

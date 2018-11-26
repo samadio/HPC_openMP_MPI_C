@@ -4,7 +4,7 @@ module load openmpi
 for procs in 1 2 4 8 16 20; do
 # sync; echo 3 > /proc/sys/vm/drop_caches 
  echo "np=${procs}"
- /usr/bin/time mpirun -np ${procs} ./parallel.x 1000000000 >> elapsweak 2>&1
+ /usr/bin/time mpirun -np ${procs} ./parallel.x 100000000 >> elapsweak 2>&1
  echo "------------------------------------------------" 
  done
 
