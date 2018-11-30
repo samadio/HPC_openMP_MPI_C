@@ -1,0 +1,45 @@
+Try number 1
+Multi-threaded MPI detected
+
+The time/date of the run...  at Fri Nov 30 10:13:04 2018
+
+This driver was compiled with:
+	-DITER=4 -DLINUX -DNOACCUR -DPREC=double 
+Malloc done.  Used 1846080096 bytes
+(0 of 1): NN lda=15000 ldb= 192 ldc=15000 0 0 0 450007.322 cn06-31
+Try number 2
+Multi-threaded MPI detected
+
+The time/date of the run...  at Fri Nov 30 10:13:07 2018
+
+This driver was compiled with:
+	-DITER=4 -DLINUX -DNOACCUR -DPREC=double 
+Malloc done.  Used 1846080096 bytes
+(0 of 1): NN lda=15000 ldb= 192 ldc=15000 0 0 0 448333.716 cn06-31
+Try number 3
+Multi-threaded MPI detected
+
+The time/date of the run...  at Fri Nov 30 10:13:10 2018
+
+This driver was compiled with:
+	-DITER=4 -DLINUX -DNOACCUR -DPREC=double 
+Malloc done.  Used 1846080096 bytes
+(0 of 1): NN lda=15000 ldb= 192 ldc=15000 0 0 0 450010.395 cn06-31
+Try number 4
+Multi-threaded MPI detected
+
+The time/date of the run...  at Fri Nov 30 10:13:13 2018
+
+This driver was compiled with:
+	-DITER=4 -DLINUX -DNOACCUR -DPREC=double 
+Malloc done.  Used 1846080096 bytes
+(0 of 1): NN lda=15000 ldb= 192 ldc=15000 0 0 0 450494.318 cn06-31
+Try number 5
+Multi-threaded MPI detected
+
+The time/date of the run...  at Fri Nov 30 10:13:16 2018
+
+This driver was compiled with:
+	-DITER=4 -DLINUX -DNOACCUR -DPREC=double 
+Malloc done.  Used 1846080096 bytes
+(0 of 1): NN lda=15000 ldb= 192 ldc=15000 0 0 0 450890.047 cn06-31
