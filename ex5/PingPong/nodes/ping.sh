@@ -3,9 +3,10 @@ module load openmpi/1.8.3/intel/14.0
 module load hwloc
 module load intel/14.0
 
-#filename=$(echo "diffsocket$1.txt")
+cd /home/samadio/hpc/ex5/PingPong/nodes
+
 #for tries in 1 2 3; do
-mpirun -np 2 IMB-MPI1 -map 1x2 -multi 0 PingPong
+mpirun -np 2 --map-by ppr:1:node recompiled_c_mpicc PingPong
 #done
 
 exit
