@@ -6,7 +6,8 @@ module load intel/14.0
 cd /home/samadio/hpc/ex5/PingPong/nodes
 
 #for tries in 1 2 3; do
-mpirun -np 2 --map-by ppr:1:node recompiled_c_mpicc -iter 1000 PingPong >>RESULTS_1.txt
+mpirun  -hostfile  hosts recompiled_c_mpicc -map 1x2 -multi 0 PingPong >>RESULTS_2.txt
+
 #done
 
 exit
