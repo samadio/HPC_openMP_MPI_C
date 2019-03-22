@@ -1,0 +1,21 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+void print_usage(int * a, int N, int nthreads) {
+    for(int tid = 0; tid < nthreads; ++tid) {
+        printf("%d: ", tid);
+        for(int i = 0; i < N; ++i) {
+            if(a[i] == tid) {
+                printf("*");
+            } else {
+                printf(" ");
+            }
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    // TODO
+    return 0;
+}
