@@ -67,7 +67,7 @@ ARCH         = mkl
 # - HPL Directory Structure / HPL library ------------------------------
 # ----------------------------------------------------------------------
 #
-TOPdir       = $(HOME)/hpc/ex6/hpl-2.2
+TOPdir       = /home/samadio/hpc/ex6/hpl-2.2
 INCdir       = $(TOPdir)/include
 BINdir       = $(TOPdir)/bin/$(ARCH)
 LIBdir       = $(TOPdir)/lib/$(ARCH)
@@ -97,12 +97,7 @@ ifndef  LAinc
 LAinc        = $(LAdir)/mkl/include
 endif
 ifndef  LAlib
-LAlib        = -L$(LAdir)/mkl/lib/intel64 \
-               -Wl,--start-group \
-               $(LAdir)/lib/intel64/libmkl_intel_lp64.a \
-               $(LAdir)/lib/intel64/libmkl_intel_thread.a \
-               $(LAdir)/lib/intel64/libmkl_core.a \
-               -Wl,--end-group -lpthread -ldl
+	LAlib=-Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_intel_lp64.a ${MKLROOT}/lib/intel64/libmkl_intel_thread.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -liomp5 -lpthread -lm -ldl
 endif
 #
 # ----------------------------------------------------------------------
@@ -175,16 +170,16 @@ HPL_DEFS     = $(F2CDEFS) $(HPL_OPTS) $(HPL_INCLUDES)
 # - Compilers / linkers - Optimization flags ---------------------------
 # ----------------------------------------------------------------------
 #
-CC       = mpicc
+CC       = mpiicc
 CCNOOPT  = $(HPL_DEFS)
 OMP_DEFS = -openmp
-CCFLAGS  = $(HPL_DEFS) -O3 -w -ansi-alias -i-static -z noexecstack -z relro -z now -nocompchk -Wall
+CCFLAGS  = $(HPL_DEFS) -O3 -w -ansi-alias -i-static -z noexecstack -z relro -z now -nocompchk -Wall -I${MKLROOT}/include
 #
 # On some platforms,  it is necessary  to use the Fortran linker to find
 # the Fortran internals used in the BLAS library.
 #
 LINKER       = $(CC)
-LINKFLAGS    = $(CCFLAGS) $(OMP_DEFS) -mt_mpi
+LINKFLAGS    = $(CCFLAGS) $(OMP_DEFS) -mt_mpi  -Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_intel_lp64.a ${MKLROOT}/lib/intel64/libmkl_intel_thread.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -liomp5 -lpthread -lm -ldl	
 #
 ARCHIVER     = ar
 ARFLAGS      = r
