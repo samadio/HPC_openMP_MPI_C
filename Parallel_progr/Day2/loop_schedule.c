@@ -23,19 +23,19 @@ int main( int argc, char * argv[] ) {
   int a[N];
   int nthreads=10;
 
-  printf("static\n");
-  for(int chunk=1,chunk<11,chunk=chunk+9){
     #pragma omp parallel
     {
       #pragma omp single //only one should execute this, no matter who
       {
-        printf("chunk= %d\n",chunk);
+        printf("chunk= None\n");
       }
 
       int thread_id=omp_get_thread_num(); //identifier
+      int i;
       
-      #pragma omp for schedule(static,chunk)//implicit barrier is placed
-      for(int i = 0; i < N; i++)
+      #pragma omp for schedule(dynamic)//implicit barrier is placed
+
+      for(i = 0; i < N; i++)
       {
         a[i]=thread_id;
       }
@@ -47,6 +47,5 @@ int main( int argc, char * argv[] ) {
         printf("\n");
       }
     }
-  }  
   return 0;
 }
