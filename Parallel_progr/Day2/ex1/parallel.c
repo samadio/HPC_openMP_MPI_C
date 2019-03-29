@@ -20,15 +20,14 @@ int main(){
     #pragma omp for
     for( i= 0 ; i <= N-1; i++)
     {
-        local+=f((i*h)+h/2);    
+      local+=f((i*h)+h/2);    
     }
-    local=pi*4*h;
+    local=local*4*h;
     #pragma omp atomic
     pi+=local;
     double duration=omp_get_wtime()-tstart;
   }
     printf("%lf in %lf sec\n", pi,duration);
 
-    return 0;
-  //}  
+    return 0;  
 }
