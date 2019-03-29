@@ -25,7 +25,10 @@ int main(){
       local+=f((i*h)+h/2);    
     }
     local=local*4*h;
-    #pragma omp atomic
+    //#pragma omp atomic
+    //pi+=local;
+
+    #pragma omp critical
     pi+=local;
   }
     double duration =omp_get_wtime()-tstart;
