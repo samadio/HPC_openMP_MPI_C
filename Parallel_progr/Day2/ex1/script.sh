@@ -1,12 +1,22 @@
-module load gnu/4.8.3
+#module load
+module load gnu/4.9.2
 
-for tries in 1 2 3 4 5;do
+#do 5 tries for the serial case
+for tries in 1 2 3 4 5; do
+echo ${tries} >> /home/samadio/hpc/Parallel_progr/Day2/ex1/serial.txt
 /home/samadio/hpc/Parallel_progr/Day2/ex1/serial >>/home/samadio/hpc/Parallel_progr/Day2/ex1/serial.txt
-end do
+done
 
-for nth in 1 2 4 8 16 20; do
-  export OMP_NUM_THREADS= nth
-   for tries in 1 2 3 4 5; do
+for n in 1 2 4 8 16 20; do
+  #set number of threads
+  export OMP_NUM_THREADS=$n
+  
+  #5 iterations for each number of threads
+  for tries in 1 2 3 4 5; do
+   	echo ${tries}>> /home/samadio/hpc/Parallel_progr/Day2/ex1/parallel.txt
    	/home/samadio/hpc/Parallel_progr/Day2/ex1/parallel >>/home/samadio/hpc/Parallel_progr/Day2/ex1/parallel.txt
-   end do
-end do
+   done
+   
+done
+
+exit

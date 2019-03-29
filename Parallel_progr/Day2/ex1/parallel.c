@@ -8,16 +8,18 @@ double f( double x){
 }
 
 int main(){
-    size_t N=1000000000;
-    double h=1.0/(N);
-    double pi=0.0;
-
+  size_t N=1000000000;
+  double h=1.0/(N);
+  double pi=0.0;
+  int nthr= omp_get_num_thread();
+  double tstart=omp_get_wtime();
+  
+  printf("Number of threads: %d",nthr);
   #pragma omp parallel
   {
     double local=0;
-    double tstart=omp_get_wtime();
     int i;
-    #pragma omp for
+    #pragma omp for schedule(static)
     for( i= 0 ; i <= N-1; i++)
     {
       local+=f((i*h)+h/2);    
@@ -25,8 +27,8 @@ int main(){
     local=local*4*h;
     #pragma omp atomic
     pi+=local;
-    double duration=omp_get_wtime()-tstart;
   }
+    double duration =omp_get_wtime()-tstart;
     printf("%lf in %lf sec\n", pi,duration);
 
     return 0;  
