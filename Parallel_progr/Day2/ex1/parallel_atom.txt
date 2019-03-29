@@ -1,0 +1,36 @@
+1
+Number of threads: 13.141593 in 6.276177 sec
+Number of threads: 13.141593 in 6.273269 sec
+Number of threads: 13.141593 in 6.287490 sec
+Number of threads: 13.141593 in 6.283675 sec
+Number of threads: 13.141593 in 6.274837 sec
+2
+Number of threads: 13.141593 in 3.230427 sec
+Number of threads: 13.141593 in 3.236451 sec
+Number of threads: 13.141593 in 3.229514 sec
+Number of threads: 13.141593 in 3.266381 sec
+Number of threads: 13.141593 in 3.230512 sec
+4
+Number of threads: 13.141593 in 1.715027 sec
+Number of threads: 13.141593 in 1.713490 sec
+Number of threads: 13.141593 in 1.714016 sec
+Number of threads: 13.141593 in 1.714111 sec
+Number of threads: 13.141593 in 1.714535 sec
+8
+Number of threads: 13.141593 in 0.912684 sec
+Number of threads: 13.141593 in 0.911409 sec
+Number of threads: 13.141593 in 0.910958 sec
+Number of threads: 13.141593 in 0.911896 sec
+Number of threads: 13.141593 in 0.912180 sec
+16
+Number of threads: 13.141593 in 0.772355 sec
+Number of threads: 13.141593 in 0.765032 sec
+Number of threads: 13.141593 in 0.761361 sec
+Number of threads: 13.141593 in 0.778129 sec
+Number of threads: 13.141593 in 0.817999 sec
+20
+Number of threads: 13.141593 in 0.765025 sec
+Number of threads: 13.141593 in 0.783507 sec
+Number of threads: 13.141593 in 0.781298 sec
+Number of threads: 13.141593 in 0.795460 sec
+Number of threads: 13.141593 in 0.745516 sec
