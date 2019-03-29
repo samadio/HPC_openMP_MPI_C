@@ -8,7 +8,7 @@ double f( double x){
 }
 
 int main(){
-  size_t N=1000000000;
+  size_t N=3000000000;
   double h=1.0/(N);
   double pi=0.0;
   int nthr= omp_get_num_threads();
