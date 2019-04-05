@@ -50,12 +50,22 @@ int main( int argc, char * argv[] ){
   MPI_Comm_size( MPI_COMM_WORLD, &npes );
 
   imesg = rank;
-  fprintf( stderr, "\nBefore Bcast operation I am process %d of %d MPI processes and my message content is: %d\n", rank, npes, imesg );
+  //fprintf( stderr, "\nBefore Bcast operation I am process %d of %d MPI processes and my message content is: %d\n", rank, npes, imesg );
+  size_t n=1000000000/sizeof(int);  
+  int* vec=(int *)calloc(n,sizeof(int));
+  
+  if(rank==0){
+  	size_t i;
+  	for(i=0;i<n;i++){
+  		vec[i]=-npes;
+  	}
+  }
+  
+  MPI_Bcast(vec, n, MPI_INT, 0, MPI_COMM_WORLD ); //if u do an if (rank%s) MPI_Bcast.. then u do it only for some, other are there waiting, but it wait for all to finish->deadlock.never ends
+  //todo: 0 send 1 GB of data: a vector full of N to all the other processes, and they send N-1
 
-  MPI_Bcast( &imesg, 1, MPI_INT, 0, MPI_COMM_WORLD );
-
-  fprintf( stderr, "\nAfter Bcast operation I am process %d of %d MPI processes and my message content is: %d\n", rank, npes, imesg );
-
+  //fprintf( stderr, "\nAfter Bcast operation I am process %d of %d MPI processes and my message content is: %d\n", rank, npes, imesg );
+  printf("v[%d]=%d \n",n-1,vec[n-1]);
   MPI_Finalize();
   
   return 0;
