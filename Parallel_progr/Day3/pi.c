@@ -23,7 +23,7 @@ double f( double x){
 }
 
 
-int main(){
+int main(int argc,char *argv[]){
   size_t N=10000000000;
   double h=1.0/(N);
   double pi=0.0;
@@ -52,10 +52,10 @@ int main(){
     size_t i;
     for(i = start; i < end; i++)
     {
-      local+=f((i*h)+h/2);
+      local+=f((i*h)+h/2.0);
     }
-
-    MPI_Reduce(&local,&pi,1,size_t,MPI_SUM,npes-1,MPI_COMM_WORLD);
+    local=local*4*h;
+    MPI_Reduce(&local,&pi,1,MPI_DOUBLE,MPI_SUM,npes-1,MPI_COMM_WORLD);
     double duration=seconds()-tstart;
 
     if(rank==npes-1){
@@ -63,8 +63,8 @@ int main(){
     }
 
     if(rank==0){
-      MPI_Recv(&pi,1,MPI_INT,npes-1,101,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
-      printf("%lf in %lf sec\n", pi,duration);
+      MPI_Recv(&pi,1,MPI_DOUBLE,npes-1,101,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+      printf("%lf in %lf sec by proc %d\n", pi,duration,rank);
     }
 
   MPI_Finalize();
