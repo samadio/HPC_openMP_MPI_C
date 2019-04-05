@@ -10,10 +10,10 @@ module load gnu/4.9.2
 for n in 1 2 4 8 16 20; do
   #set number of threads
   export OMP_NUM_THREADS=$n
-  echo ${n}>> /home/samadio/hpc/Parallel_progr/Day2/ex1/atom3.txt
+  echo ${n}>> /home/samadio/hpc/Parallel_progr/Day2/ex1/atom10.txt
   #5 iterations for each number of threads
-  for tries in 1 2; do
-   	/home/samadio/hpc/Parallel_progr/Day2/ex1/atom >>/home/samadio/hpc/Parallel_progr/Day2/ex1/atom3.txt
+  for tries in 1 ; do
+   	/home/samadio/hpc/Parallel_progr/Day2/ex1/atom >>/home/samadio/hpc/Parallel_progr/Day2/ex1/atom10.txt
    done
    
 done
