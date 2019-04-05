@@ -29,8 +29,9 @@ int main( int argc, char * argv[] ){
   MPI_Comm_rank( MPI_COMM_WORLD, &rank );
   MPI_Comm_size( MPI_COMM_WORLD, &npes );
 
-  fprintf( stderr, "\nI am process %d of %d MPI processes\n", rank, npes );
+  
 
+  
   MPI_Finalize();
   
   return 0;
