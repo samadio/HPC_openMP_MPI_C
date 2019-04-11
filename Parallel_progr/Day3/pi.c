@@ -37,18 +37,20 @@ int main(int argc,char *argv[]){
     double local=0.0;
     size_t work=N/npes;
     size_t rest= N-N/npes*npes; //number of elements lost in division
-    /*if(rank<rest){
-      start=rank*work; //to rest procs i give one more element
-      end=start+work+1;
+    
+    if(rank<rest){
+      size_t start=rank*(work+1); //to rest procs i give one more element
+      size_t end=start+work+1;
     }
     else{
-      ;
+      size_t start=rank*work+rest;
+      size_t end=start+work;
     }
-    */
+    
 
-    size_t start= rank*work;
-    size_t end=(rank+1)*work;
-    if(rank==npes-1){end=N;}
+    //size_t start= rank*work;
+    //size_t end=(rank+1)*work;
+    //if(rank==npes-1){end=N;} //unbalanced work
     size_t i;
     for(i = start; i < end; i++)
     {
