@@ -37,7 +37,7 @@ int main(int argc,char *argv[]){
     double local=0.0;
     size_t work=N/npes;
     size_t rest= N-N/npes*npes; //number of elements lost in division
-    
+    size_t start,end;    
     if(rank<rest){
       size_t start=rank*(work+1); //to rest procs i give one more element
       size_t end=start+work+1;
