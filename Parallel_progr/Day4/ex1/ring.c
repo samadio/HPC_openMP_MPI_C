@@ -10,9 +10,9 @@ int main(int argc,char *argv[]){
   MPI_Init( &argc, &argv );
     MPI_Comm_rank( MPI_COMM_WORLD, &rank );
     MPI_Comm_size( MPI_COMM_WORLD, &npes );
-    size_t N=4; //10^8
+    size_t N=100000000; //10^8
     int* message= (int*)malloc(N*sizeof(int));
-    size_t sum=0;
+    int* sum= (int*)calloc(N,sizeof(int));
 
     int i;
     for (i = 0; i < N; i++)
@@ -31,20 +31,26 @@ int main(int argc,char *argv[]){
       }
       else
       {
-        rec=N-1;
+        rec=npes-1;
       }
       
       int j;
       for ( j = 0; j < N; j++)
       {
-        sum+=message[j];
+        sum[j]+=message[j];
       }
       
-      MPI_Irecv(message,N,MPI_INT,rec,101,MPI_COMM_WORLD,&req);
       MPI_Wait(&req,MPI_STATUS_IGNORE);
+      MPI_Recv(message,N,MPI_INT,rec,101,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
     }
 
-      printf("%lu from %d\n", sum, rank);
+/*
+    for (size_t i = 0; i <N; i++)
+    {
+      printf("%d ", sum[i]);
+    }
+    printf(" from proc %d\n", rank);
+*/ //checked it works with N=4 
 
   MPI_Finalize();
 
