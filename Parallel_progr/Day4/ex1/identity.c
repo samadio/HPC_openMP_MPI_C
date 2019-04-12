@@ -2,55 +2,85 @@
 #include<stdlib.h>
 #include<mpi.h>
 
-
 int main(int argc,char *argv[]){
-  int rank = 0; // store the MPI identifier of the process
-  int npes = 1; // store the number of MPI processes
-
+  int rank = 0; 
+  int npes = 1;
+  int N=5; //global rows
+  
   MPI_Init( &argc, &argv );
     MPI_Comm_rank( MPI_COMM_WORLD, &rank );
     MPI_Comm_size( MPI_COMM_WORLD, &npes );
-    size_t N=100000000; //10^8
-    int* message= (int*)malloc(N*sizeof(int));
-    int* sum= (int*)calloc(N,sizeof(int));
+    int local_N=N/npes ; //local numb of rows; 
+    int rest=N-(local_N*npes);
 
-    int i;
-    for (i = 0; i < N; i++)
+    if(rank<rest) local_N+=1;
+
+    //allocate a matrix with local_N rows and N cols
+    int **A=(int**)malloc(local_N*sizeof(int*));
+    int** received;
+    
+    if(rank==0) received=(int**)malloc(local_N*sizeof(int*));   //only proc0 reserves memory
+    
+    int i,start;
+
+    for (i = 0; i < local_N; i++)
     {
-      message[i]=rand()%10;
+      A[i]=(int*)calloc(N,sizeof(int));
+      if (rank==0) received[i]=(int*)malloc(N*sizeof(int)); //only proc0 reserves memory part2
     }
     
-    for (i = 0; i < npes; i++)
-    {
-      MPI_Request req;
+    if(rank<rest) start=rank*(local_N);  //distributing workload
+    else start=rest+(rank*local_N);
 
-      MPI_Isend(message,N,MPI_INT,(rank+1)%npes,101,MPI_COMM_WORLD,&req); //send message npes times
-      int rec;
-      if(rank!=0){
-        rec=rank-1;
-      }
-      else
+
+    int row,col;
+    for (i = 0; i <local_N; i++)
+    {
+      A[i][start+i]=1; //row index always between 0 and local_N, col index depends on proc
+    }
+    
+    MPI_Request req;
+    
+    FILE *f = fopen("identity.txt", "a"); //output file
+
+
+    if (rank!=0) //every rank except 0 send even overlapping, each has its own length local_N
+    {
+      MPI_Isend(A,N*local_N,MPI_INT,0,101,MPI_COMM_WORLD,&req);
+    }
+    
+
+    if (rank==0) //0 receives them all
+    {
+      int row,col;
+      for (row = 0; row < local_N; row++)
+        {
+          for (col = 0; col < N; col++)
+          {
+            fprintf(f,"%d ",A[row][col]);  //0 write its own part of the matrix
+          }
+          fprintf(f,"\n");
+        }
+
+      for (i = 1; i < npes; i++)
       {
-        rec=npes-1;
+        if(i==rest) local_N=local_N-1;
+        MPI_Recv(received,N*local_N,MPI_INT,i,101,MPI_COMM_WORLD,MPI_STATUS_IGNORE);//&req);
+        //MPI_Wait(&req,MPI_STATUS_IGNORE); //this way received can not be overwritten by another receive
+
+        for (row = 0; row < local_N; row++)
+        {
+          for (col = 0; col < N; col++)
+          {
+            fprintf(f,"%d ",received[row][col]);
+          }
+          fprintf(f,"\n");
+        }
       }
       
-      int j;
-      for ( j = 0; j < N; j++)
-      {
-        sum[j]+=message[j];
-      }
-      
-      MPI_Wait(&req,MPI_STATUS_IGNORE);
-      MPI_Recv(message,N,MPI_INT,rec,101,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
     }
-
-/*
-    for (size_t i = 0; i <N; i++)
-    {
-      printf("%d ", sum[i]);
-    }
-    printf(" from proc %d\n", rank);
-*/ //checked it works with N=4 
+    
+    fclose(f);  
 
   MPI_Finalize();
 
