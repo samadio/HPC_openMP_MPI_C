@@ -6,7 +6,7 @@ int main(int argc,char *argv[]){
   int rank = 0; 
   int npes = 1;
   int N=8; //global 
-  //FILE *f = fopen("identity.txt", "a"); //output file
+  FILE *f = fopen("identity.txt", "w"); //output file
   
   MPI_Init( &argc, &argv );
     MPI_Comm_rank( MPI_COMM_WORLD, &rank );
@@ -30,26 +30,11 @@ int main(int argc,char *argv[]){
       A[N*i+(start+i)]=1; //row index always between 0 and local_N, col index depends on proc
     }
     
-    int row,col;
-      for (row = 0; row < local_N; row++)
-       {
-        for (col = 0; col < N; col++)
-        {
-          printf("%d ",A[col+row*N]);  //0 write its own part of the matrix
-        }
-        printf(" by rank %d\n",rank);
-       }
-
-
-    MPI_Request req;
-
-    /*
     if (rank!=0) //every rank except 0 send even overlapping, each has its own length local_N
     {
-      MPI_Isend(&A,N*local_N,MPI_INT,0,101,MPI_COMM_WORLD,&req);
+      MPI_Send(A,N*local_N,MPI_INT,0,101,MPI_COMM_WORLD);
     }
 
-    MPI_Barrier(MPI_COMM_WORLD); //eventually
     if (rank==0) //0 receives them all
     {
       int row,col;
@@ -57,9 +42,9 @@ int main(int argc,char *argv[]){
        {
         for (col = 0; col < N; col++)
         {
-          printf("%d ",A[col+row*N]);  //0 write its own part of the matrix
+          fprintf(f,"%d ",A[col+row*N]);  //0 write its own part of the matrix
         }
-        printf("\n");
+        fprintf(f,"\n");
        }
     
       int* received;
@@ -67,25 +52,24 @@ int main(int argc,char *argv[]){
       for (i = 1; i <npes; i++)
       {
         if(i==rest  && rest!=0) local_N=local_N-1;
-        MPI_Recv(&received,N*local_N,MPI_INT,i,101,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
-        
+        MPI_Recv(received,N*local_N,MPI_INT,i,101,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
         
         for (row = 0; row < local_N; row++)
         {
           for (col = 0; col < N; col++)
           {
-            printf("%d ",received[col+row*N]);
+            fprintf(f,"%d ",received[col+row*N]);
           }
-          printf("by rank %d\n", i);
+          fprintf(f,"by rank %d\n", i);
         }
       }
       free(received);
-    }*/
+    }
 
   free(A);
 
   MPI_Finalize();
 
-//  fclose(f);  
+  fclose(f);  
   return 0;  
 }
