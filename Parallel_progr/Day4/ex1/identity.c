@@ -5,7 +5,7 @@
 int main(int argc,char *argv[]){
   int rank = 0; 
   int npes = 1;
-  int N=7; //global 
+  int N=8; //global 
   //FILE *f = fopen("identity.txt", "a"); //output file
   
   MPI_Init( &argc, &argv );
@@ -25,41 +25,50 @@ int main(int argc,char *argv[]){
     else start=rest+(rank*local_N);
 
 
-    int row,col;
     for (i = 0; i <local_N; i++)
     {
-      A[i+N*(start+i)]=1; //row index always between 0 and local_N, col index depends on proc
+      A[N*i+(start+i)]=1; //row index always between 0 and local_N, col index depends on proc
     }
     
+    int row,col;
+      for (row = 0; row < local_N; row++)
+       {
+        for (col = 0; col < N; col++)
+        {
+          printf("%d ",A[col+row*N]);  //0 write its own part of the matrix
+        }
+        printf(" by rank %d\n",rank);
+       }
+
+
     MPI_Request req;
 
-
+    /*
     if (rank!=0) //every rank except 0 send even overlapping, each has its own length local_N
     {
       MPI_Isend(&A,N*local_N,MPI_INT,0,101,MPI_COMM_WORLD,&req);
     }
 
+    MPI_Barrier(MPI_COMM_WORLD); //eventually
     if (rank==0) //0 receives them all
     {
       int row,col;
       for (row = 0; row < local_N; row++)
+       {
+        for (col = 0; col < N; col++)
         {
-          for (col = 0; col < N; col++)
-          {
-            printf("%d ",A[col+row*N]);  //0 write its own part of the matrix
-          }
-          printf("\n");
+          printf("%d ",A[col+row*N]);  //0 write its own part of the matrix
         }
-
+        printf("\n");
+       }
+    
       int* received;
+      received =(int*)malloc(N*local_N*sizeof(int)); //received has the maximum local_N, so it's fine
       for (i = 1; i <npes; i++)
       {
-        if(i==rest) local_N=local_N-1;
-        received =(int*)malloc(N*local_N*sizeof(int));
-        MPI_Recv(&received,N*local_N,MPI_INT,i,101,MPI_COMM_WORLD,MPI_STATUS_IGNORE);//&req);
+        if(i==rest  && rest!=0) local_N=local_N-1;
+        MPI_Recv(&received,N*local_N,MPI_INT,i,101,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
         
-        //MPI_Wait(&req,MPI_STATUS_IGNORE); //this way received can not be overwritten by another receive
-
         
         for (row = 0; row < local_N; row++)
         {
@@ -69,11 +78,11 @@ int main(int argc,char *argv[]){
           }
           printf("by rank %d\n", i);
         }
-        free(received);
       }
-    }
+      free(received);
+    }*/
 
-    free(A);
+  free(A);
 
   MPI_Finalize();
 
