@@ -1,0 +1,704 @@
+#------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2019 Update 1, MPI-1 part    
+#------------------------------------------------------------
+# Date                  : Fri Dec  7 13:46:31 2018
+# Machine               : x86_64
+# System                : Linux
+# Release               : 2.6.32-573.12.1.el6.x86_64
+# Version               : #1 SMP Wed Dec 16 11:39:16 CET 2015
+# MPI Version           : 3.0
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# recompiled_c_mpicc -iter 1000 PingPong
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   4194304
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT
+# MPI_Op                         :   MPI_SUM  
+#
+#
+
+# List of Benchmarks to run:
+
+# PingPong
+
+#---------------------------------------------------
+# Benchmarking PingPong 
+# #processes = 2 
+#---------------------------------------------------
+       #bytes #repetitions      t[usec]   Mbytes/sec
+            0         1000         1.62         0.00
+            1         1000         1.68         0.59
+            2         1000         1.67         1.20
+            4         1000         1.66         2.41
+            8         1000         1.67         4.78
+           16         1000         1.80         8.89
+           32         1000         1.80        17.80
+           64         1000         1.80        35.53
+          128         1000         1.85        69.28
+          256         1000         1.97       129.91
+          512         1000         2.17       236.32
+         1024         1000         2.55       401.96
+         2048         1000         3.25       630.25
+         4096         1000         4.20       975.93
+         8192         1000         5.87      1394.87
+        16384         1000         9.19      1783.58
+        32768         1000        15.76      2079.38
+        65536          640        45.33      1445.66
+       131072          320        75.49      1736.34
+       262144          160       115.85      2262.85
+       524288           80       202.85      2584.60
+      1048576           40       373.59      2806.78
+      2097152           20       719.93      2913.00
+      4194304           10      1359.25      3085.75
+
+
+# All processes entering MPI_Finalize
+
+cn08-06.22645ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9858ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9859ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9860ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9842ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9843ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9844ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn08-06.22660ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn08-06.22643ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn08-06.22644ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn08-06.22659ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn08-06.22661ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9845ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9861ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn08-06.22658ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn08-06.22642ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+
+Calling sequence (command line will be repeated in Output table!):
+
+
+IMB-MPI1         [-h{elp}]
+[-npmin        <NPmin>]
+[-multi        <outflag>]
+[-off_cache    <cache_size[,cache_line_size]>
+[-iter         <msgspersample[,overall_vol[,msgs_nonaggr]]>
+[-iter_policy  <iter_policy>]
+[-time         <max_runtime per sample>]
+[-mem          <max. per process memory for overall message buffers>]
+[-msglen       <Lengths_file>]
+[-map          <PxQ>]
+[-input        <filename>]
+[benchmark1    [benchmark2 [...]]]
+[-include      [benchmark1,[benchmark2,[...]]]
+[-exclude      [benchmark1,[benchmark2,[...]]]
+[-msglog       <[min_msglog]:max_msglog>]
+[-root_shift   <on or off>]
+[-sync         <on or off>]
+[-imb_barrier  <on or off>]
+
+where 
+
+- h ( or help) just provides basic help 
+(if active, all other arguments are ignored)
+
+- npmin
+
+the argumaent after npmin is NPmin, 
+the minimum number of processes to run on
+(then if IMB is started on NP processes, the process numbers 
+NPmin, 2*NPmin, ... ,2^k * NPmin < NP, NP are used)
+>>>
+to run on just NP processes, run IMB on NP and select -npmin NP
+<<<
+default: 
+NPmin=2
+
+- off_cache 
+
+the argument after off_cache can be either 1 single number (cache_size),  
+or 2 comma separated numbers (cache_size,cache_line_size), or just -1 
+
+By default, without this flag, the communications buffer is  
+the same within all repetitions of one message size sample;   
+most likely, cache reusage is yielded and thus throughput results   
+that might be non realistic.    
+
+With -off_cache, it is attempted to avoid cache reusage.    
+cache_size is a float for an upper bound of the size of the last level cache in MBytes 
+cache_line_size is assumed to be the size (Bytes) of a last level cache line  
+(can be an upper estimate).  
+The sent/recv'd data are stored in buffers of size ~ 2 x MAX( cache_size, message_size );  
+when repetitively using messages of a particular size, their addresses are advanced within those  
+buffers so that a single message is at least 2 cache lines after the end of the previous message.  
+Only when those buffers have been marched through (eventually), they will re-used from the beginning.  
+
+A cache_size and a cache_line_size are assumed as statically defined    
+in  => IMB_mem_info.h; these are used when -off_cache -1 is entered  
+
+remark: -off_cache is effective for IMB-MPI1, IMB-EXT, but not IMB-IO  
+
+examples  
+-off_cache -1 (use defaults of IMB_mem_info.h);  
+-off_cache 2.5 (2.5 MB last level cache, default line size);  
+-off_cache 16,128 (16 MB last level cache, line size 128);  
+
+NOTE: the off_cache mode might also be influenced by eventual internal  
+caching with the MPI library. This could make the interpretation 
+intricate.  
+
+default: 
+no cache control, data likely to come out of cache most of the time 
+
+- iter 
+
+the argument after -iter can contain from 1 to 3 comma separated values
+3 integer numbers override the defaults 
+MSGSPERSAMPLE, OVERALL_VOL, MSGS_NONAGGR of =>IMB_settings.h
+examples 
+-iter 2000        (override MSGSPERSAMPLE by value 2000) 
+-iter 1000,100    (override OVERALL_VOL by 100) 
+-iter 1000,40,150 (override MSGS_NONAGGR by 150) 
+
+
+default: 
+iteration control through parameters MSGSPERSAMPLE,OVERALL_VOL,MSGS_NONAGGR => IMB_settings.h 
+
+- iter_policy
+
+the argument after -iter_policy is a one from possible strings,
+specifying that policy will be used for auto iteration control:
+dynamic,multiple_np,auto,off
+example 
+-iter_policy auto
+default:
+iteration control through parameter ITER_POLICY => IMB_settings.h 
+
+NOTE: !! New in versions from IMB 3.2 on !!  
+the iter selection is overridden by a dynamic selection that is a new default in 
+IMB 3.2: when a maximum run time (per sample) is expected to be exceeded, the 
+iteration number will be cut down; see -time flag  
+
+- time
+
+the argument after -time is a float, specifying that 
+a benchmark will run at most that many seconds per message size 
+the combination with the -iter flag or its defaults is so that always 
+the maximum number of repetitions is chosen that fulfills all restrictions 
+example 
+-time 0.150       (a benchmark will (roughly) run at most 150 milli seconds per message size, iff
+the default (or -iter selected) number of repetitions would take longer than that) 
+
+remark: per sample, the rough number of repetitions to fulfill the -time request 
+is estimated in preparatory runs that use ~ 1 second overhead 
+
+default: 
+A fixed time limit SECS_PER_SAMPLE =>IMB_settings.h; currently set to 10  
+(new default in IMB_3.2) 
+
+- mem
+
+the argument after -mem is a float, specifying that 
+at most that many GBytes are allocated per process for the message buffers 
+if the size is exceeded, a warning will be output, stating how much memory 
+would have been necessary, but the overall run is not interrupted 
+example 
+-mem 0.2         (restrict memory for message buffers to 200 MBytes per process) 
+
+default: 
+the memory is restricted by MAX_MEM_USAGE => IMB_mem_info.h 
+
+- map
+
+the argument after -map is PxQ, P,Q are integer numbers with P*Q <= NP
+enter PxQ with the 2 numbers separated by letter "x" and no blancs
+the basic communicator is set up as P by Q process grid
+
+if, e.g., one runs on N nodes of X processors each, and inserts
+P=X, Q=N, then the numbering of processes is "inter node first"
+running PingPong with P=X, Q=2 would measure inter-node performance
+(assuming MPI default would apply 'normal' mapping, i.e. fill nodes
+first priority) 
+
+default: 
+Q=1
+
+- multi
+
+the argument after -multi is outflag (0 or 1)
+
+if -multi is selected, running the N process version of a benchmark
+on NP overall, means running on (NP/N) simultaneous groups of N each.
+
+outflag only controls default (0) or extensive (1) output charts.
+0: only lowest performance groups is output
+1: all groups are output
+
+default: 
+multi off
+
+- msglen
+
+the argument after -msglen is a lengths_file, an ASCII file, containing any set of nonnegative
+message lengths, 1 per line
+
+default: 
+no lengths_file, lengths defined by settings.h, settings_io.h
+
+- input
+
+the argument after -input is a filename is any text file containing, line by line, benchmark names
+facilitates running particular benchmarks as compared to using the
+command line.
+default: 
+no input file exists
+
+- include
+
+the argument after -include  is one or more benchmark names separated by comma
+
+- exclude
+
+the argument after -exclude  is one or more benchmark names separated by comma
+
+
+-msglog
+
+the argument after -msglog min:max, min and max are positive integer numbers, min<max
+where min is power of 2 so that second smallest data transfer size is max(unit,2^min)
+(the smallest always being 0), where unit = sizeof(float) for reductions, unit = 1 else
+max is power of 2 so that 2^max is largest messages size, max must be less than 31
+
+-root_shift
+
+controls root change at each iteration step for certain collective benchmarks,
+possible argument values are on (1|enable|yes) or off (0|disable|no)
+default:
+off
+
+-sync
+
+controls whether all processes are syncronized at each iteration step in collective benchmarks,
+possible argument values are on (1|enable|yes) or off (0|disable|no)
+default:
+on
+
+
+-imb_barrier
+
+use internal MPI-independent barrier syncronization implementation,
+possible argument values are on (1|enable|yes) or off (0|disable|no)
+default:
+off
+
+- benchmarkX is (in arbitrary lower/upper case spelling)
+
+PingPongSpecificSource
+PingPongAnySource
+PingPingSpecificSource
+PingPingAnySource
+PingPing
+PingPong
+Sendrecv
+Exchange
+Bcast
+Allgather
+Allgatherv
+Gather
+Gatherv
+Scatter
+Scatterv
+Alltoall
+Alltoallv
+Reduce
+Reduce_scatter
+Allreduce
+Barrier
+Uniband
+Biband
+
+cn08-06.22704ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9912ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn08-06.22705ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9915ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9913ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9914ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn08-06.22706ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn08-06.22707ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn08-06.22724ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9938ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9935ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9936ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn08-06.22726ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn07-32.9939ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn08-06.22727ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+cn08-06.22728ipath_userinit: Mismatched user minor version (12) and driver minor version (13) while context sharing. Ensure that driver and library are from the same release.
+
+Calling sequence (command line will be repeated in Output table!):
+
+
+IMB-MPI1         [-h{elp}]
+[-npmin        <NPmin>]
+[-multi        <outflag>]
+[-off_cache    <cache_size[,cache_line_size]>
+[-iter         <msgspersample[,overall_vol[,msgs_nonaggr]]>
+[-iter_policy  <iter_policy>]
+[-time         <max_runtime per sample>]
+[-mem          <max. per process memory for overall message buffers>]
+[-msglen       <Lengths_file>]
+[-map          <PxQ>]
+[-input        <filename>]
+[benchmark1    [benchmark2 [...]]]
+[-include      [benchmark1,[benchmark2,[...]]]
+[-exclude      [benchmark1,[benchmark2,[...]]]
+[-msglog       <[min_msglog]:max_msglog>]
+[-root_shift   <on or off>]
+[-sync         <on or off>]
+[-imb_barrier  <on or off>]
+
+where 
+
+- h ( or help) just provides basic help 
+(if active, all other arguments are ignored)
+
+- npmin
+
+the argumaent after npmin is NPmin, 
+the minimum number of processes to run on
+(then if IMB is started on NP processes, the process numbers 
+NPmin, 2*NPmin, ... ,2^k * NPmin < NP, NP are used)
+>>>
+to run on just NP processes, run IMB on NP and select -npmin NP
+<<<
+default: 
+NPmin=2
+
+- off_cache 
+
+the argument after off_cache can be either 1 single number (cache_size),  
+or 2 comma separated numbers (cache_size,cache_line_size), or just -1 
+
+By default, without this flag, the communications buffer is  
+the same within all repetitions of one message size sample;   
+most likely, cache reusage is yielded and thus throughput results   
+that might be non realistic.    
+
+With -off_cache, it is attempted to avoid cache reusage.    
+cache_size is a float for an upper bound of the size of the last level cache in MBytes 
+cache_line_size is assumed to be the size (Bytes) of a last level cache line  
+(can be an upper estimate).  
+The sent/recv'd data are stored in buffers of size ~ 2 x MAX( cache_size, message_size );  
+when repetitively using messages of a particular size, their addresses are advanced within those  
+buffers so that a single message is at least 2 cache lines after the end of the previous message.  
+Only when those buffers have been marched through (eventually), they will re-used from the beginning.  
+
+A cache_size and a cache_line_size are assumed as statically defined    
+in  => IMB_mem_info.h; these are used when -off_cache -1 is entered  
+
+remark: -off_cache is effective for IMB-MPI1, IMB-EXT, but not IMB-IO  
+
+examples  
+-off_cache -1 (use defaults of IMB_mem_info.h);  
+-off_cache 2.5 (2.5 MB last level cache, default line size);  
+-off_cache 16,128 (16 MB last level cache, line size 128);  
+
+NOTE: the off_cache mode might also be influenced by eventual internal  
+caching with the MPI library. This could make the interpretation 
+intricate.  
+
+default: 
+no cache control, data likely to come out of cache most of the time 
+
+- iter 
+
+the argument after -iter can contain from 1 to 3 comma separated values
+3 integer numbers override the defaults 
+MSGSPERSAMPLE, OVERALL_VOL, MSGS_NONAGGR of =>IMB_settings.h
+examples 
+-iter 2000        (override MSGSPERSAMPLE by value 2000) 
+-iter 1000,100    (override OVERALL_VOL by 100) 
+-iter 1000,40,150 (override MSGS_NONAGGR by 150) 
+
+
+default: 
+iteration control through parameters MSGSPERSAMPLE,OVERALL_VOL,MSGS_NONAGGR => IMB_settings.h 
+
+- iter_policy
+
+the argument after -iter_policy is a one from possible strings,
+specifying that policy will be used for auto iteration control:
+dynamic,multiple_np,auto,off
+example 
+-iter_policy auto
+default:
+iteration control through parameter ITER_POLICY => IMB_settings.h 
+
+NOTE: !! New in versions from IMB 3.2 on !!  
+the iter selection is overridden by a dynamic selection that is a new default in 
+IMB 3.2: when a maximum run time (per sample) is expected to be exceeded, the 
+iteration number will be cut down; see -time flag  
+
+- time
+
+the argument after -time is a float, specifying that 
+a benchmark will run at most that many seconds per message size 
+the combination with the -iter flag or its defaults is so that always 
+the maximum number of repetitions is chosen that fulfills all restrictions 
+example 
+-time 0.150       (a benchmark will (roughly) run at most 150 milli seconds per message size, iff
+the default (or -iter selected) number of repetitions would take longer than that) 
+
+remark: per sample, the rough number of repetitions to fulfill the -time request 
+is estimated in preparatory runs that use ~ 1 second overhead 
+
+default: 
+A fixed time limit SECS_PER_SAMPLE =>IMB_settings.h; currently set to 10  
+(new default in IMB_3.2) 
+
+- mem
+
+the argument after -mem is a float, specifying that 
+at most that many GBytes are allocated per process for the message buffers 
+if the size is exceeded, a warning will be output, stating how much memory 
+would have been necessary, but the overall run is not interrupted 
+example 
+-mem 0.2         (restrict memory for message buffers to 200 MBytes per process) 
+
+default: 
+the memory is restricted by MAX_MEM_USAGE => IMB_mem_info.h 
+
+- map
+
+the argument after -map is PxQ, P,Q are integer numbers with P*Q <= NP
+enter PxQ with the 2 numbers separated by letter "x" and no blancs
+the basic communicator is set up as P by Q process grid
+
+if, e.g., one runs on N nodes of X processors each, and inserts
+P=X, Q=N, then the numbering of processes is "inter node first"
+running PingPong with P=X, Q=2 would measure inter-node performance
+(assuming MPI default would apply 'normal' mapping, i.e. fill nodes
+first priority) 
+
+default: 
+Q=1
+
+- multi
+
+the argument after -multi is outflag (0 or 1)
+
+if -multi is selected, running the N process version of a benchmark
+on NP overall, means running on (NP/N) simultaneous groups of N each.
+
+outflag only controls default (0) or extensive (1) output charts.
+0: only lowest performance groups is output
+1: all groups are output
+
+default: 
+multi off
+
+- msglen
+
+the argument after -msglen is a lengths_file, an ASCII file, containing any set of nonnegative
+message lengths, 1 per line
+
+default: 
+no lengths_file, lengths defined by settings.h, settings_io.h
+
+- input
+
+the argument after -input is a filename is any text file containing, line by line, benchmark names
+facilitates running particular benchmarks as compared to using the
+command line.
+default: 
+no input file exists
+
+- include
+
+the argument after -include  is one or more benchmark names separated by comma
+
+- exclude
+
+the argument after -exclude  is one or more benchmark names separated by comma
+
+
+-msglog
+
+the argument after -msglog min:max, min and max are positive integer numbers, min<max
+where min is power of 2 so that second smallest data transfer size is max(unit,2^min)
+(the smallest always being 0), where unit = sizeof(float) for reductions, unit = 1 else
+max is power of 2 so that 2^max is largest messages size, max must be less than 31
+
+-root_shift
+
+controls root change at each iteration step for certain collective benchmarks,
+possible argument values are on (1|enable|yes) or off (0|disable|no)
+default:
+off
+
+-sync
+
+controls whether all processes are syncronized at each iteration step in collective benchmarks,
+possible argument values are on (1|enable|yes) or off (0|disable|no)
+default:
+on
+
+
+-imb_barrier
+
+use internal MPI-independent barrier syncronization implementation,
+possible argument values are on (1|enable|yes) or off (0|disable|no)
+default:
+off
+
+- benchmarkX is (in arbitrary lower/upper case spelling)
+
+PingPongSpecificSource
+PingPongAnySource
+PingPingSpecificSource
+PingPingAnySource
+PingPing
+PingPong
+Sendrecv
+Exchange
+Bcast
+Allgather
+Allgatherv
+Gather
+Gatherv
+Scatter
+Scatterv
+Alltoall
+Alltoallv
+Reduce
+Reduce_scatter
+Allreduce
+Barrier
+Uniband
+Biband
+
+#------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2019 Update 1, MPI-1 part    
+#------------------------------------------------------------
+# Date                  : Fri Dec  7 14:30:57 2018
+# Machine               : x86_64
+# System                : Linux
+# Release               : 2.6.32-573.12.1.el6.x86_64
+# Version               : #1 SMP Wed Dec 16 11:39:16 CET 2015
+# MPI Version           : 3.0
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# recompiled_c_mpicc -map 1x2 -multi 0 PingPong
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   4194304
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT
+# MPI_Op                         :   MPI_SUM  
+#
+#
+
+# List of Benchmarks to run:
+
+# (Multi-)PingPong
+
+#-----------------------------------------------------------------------------
+# Benchmarking PingPong 
+# #processes = 2 
+#-----------------------------------------------------------------------------
+       #bytes #repetitions  t_min[usec]  t_max[usec]  t_avg[usec]   Mbytes/sec
+            0         1000         0.28         0.28         0.28         0.00
+            1         1000         0.30         0.30         0.30         3.32
+            2         1000         0.29         0.29         0.29         6.80
+            4         1000         0.30         0.30         0.30        13.25
+            8         1000         0.33         0.33         0.33        24.43
+           16         1000         0.33         0.33         0.33        48.63
+           32         1000         0.33         0.33         0.33        95.94
+           64         1000         0.45         0.45         0.45       143.05
+          128         1000         0.45         0.45         0.45       283.16
+          256         1000         0.46         0.46         0.46       555.91
+          512         1000         0.47         0.47         0.47      1078.87
+         1024         1000         0.56         0.56         0.56      1817.21
+         2048         1000         0.74         0.74         0.74      2765.59
+         4096         1000         1.04         1.04         1.04      3929.07
+         8192         1000         1.57         1.57         1.57      5202.87
+        16384         1000         3.15         3.16         3.16      5192.25
+        32768         1000         4.56         4.56         4.56      7182.78
+        65536          640         7.28         7.29         7.29      8994.88
+       131072          320        13.30        13.31        13.31      9850.32
+       262144          160        25.05        25.05        25.05     10463.44
+       524288           80        47.83        47.83        47.83     10961.21
+      1048576           40       113.36       113.90       113.63      9206.23
+      2097152           20       194.63       195.53       195.08     10725.63
+      4194304           10       429.80       432.60       431.20      9695.60
+
+
+# All processes entering MPI_Finalize
+
+#------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2019 Update 1, MPI-1 part    
+#------------------------------------------------------------
+# Date                  : Fri Dec  7 14:37:46 2018
+# Machine               : x86_64
+# System                : Linux
+# Release               : 2.6.32-573.12.1.el6.x86_64
+# Version               : #1 SMP Wed Dec 16 11:39:16 CET 2015
+# MPI Version           : 3.0
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# recompiled_c_mpicc -map 1x2 -multi 0 PingPong
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   4194304
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT
+# MPI_Op                         :   MPI_SUM  
+#
+#
+
+# List of Benchmarks to run:
+
+# (Multi-)PingPong
+
+#-----------------------------------------------------------------------------
+# Benchmarking PingPong 
+# #processes = 2 
+#-----------------------------------------------------------------------------
+       #bytes #repetitions  t_min[usec]  t_max[usec]  t_avg[usec]   Mbytes/sec
+            0         1000         1.73         1.73         1.73         0.00
+            1         1000         1.75         1.75         1.75         0.57
+            2         1000         1.74         1.74         1.74         1.15
+            4         1000         1.75         1.75         1.75         2.28
+            8         1000         1.75         1.75         1.75         4.56
+           16         1000         1.92         1.92         1.92         8.33
+           32         1000         1.89         1.89         1.89        16.95
+           64         1000         1.89         1.89         1.89        33.82
+          128         1000         1.93         1.93         1.93        66.48
+          256         1000         2.10         2.10         2.10       122.13
+          512         1000         2.26         2.26         2.26       226.74
+         1024         1000         2.62         2.62         2.62       390.98
+         2048         1000         3.35         3.35         3.35       611.71
+         4096         1000         4.30         4.30         4.30       951.79
+         8192         1000         6.06         6.06         6.06      1352.27
+        16384         1000         9.30         9.30         9.30      1761.45
+        32768         1000        15.79        15.79        15.79      2075.69
+        65536          640        45.80        45.81        45.81      1430.65
+       131072          320        75.55        75.56        75.55      1734.72
+       262144          160       114.32       114.34       114.33      2292.66
+       524288           80       196.84       196.89       196.86      2662.90
+      1048576           40       364.99       365.08       365.03      2872.22
+      2097152           20       684.10       684.27       684.19      3064.79
+      4194304           10      1321.85      1322.20      1322.03      3172.22
+
+
+# All processes entering MPI_Finalize
+

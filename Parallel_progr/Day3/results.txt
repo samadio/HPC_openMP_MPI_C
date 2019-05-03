@@ -1,0 +1,14 @@
+3.141593 in 61.814760 sec by proc 0
+3.141593 in 61.815543 sec by proc 0
+3.141593 in 31.925568 sec by proc 0
+3.141593 in 31.929119 sec by proc 0
+3.141593 in 15.878455 sec by proc 0
+3.141593 in 15.878107 sec by proc 0
+3.141593 in 8.427509 sec by proc 0
+3.141593 in 8.436575 sec by proc 0
+3.141593 in 4.500832 sec by proc 0
+3.141593 in 4.476257 sec by proc 0
+3.141593 in 3.590915 sec by proc 0
+3.141593 in 3.592774 sec by proc 0
+3.141593 in 1.791862 sec by proc 0
+3.141593 in 1.795360 sec by proc 0

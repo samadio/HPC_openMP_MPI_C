@@ -1,4 +1,0 @@
-The program is not using OMP library, it's actually using . So in order 
-to get it to work you can use MKL_NUM_THREADS. Or u can use mp_linpack/bin_intel/intel64 and use xhpl_intel64. Use ldd to see the shared libraries linked to the executable
-Why intel is better? the multithread better version of intel is minimizing a lot the overhead given by mpi messages:
-in multithread approach intel probably minimizes the message passing, so the resources it takes.

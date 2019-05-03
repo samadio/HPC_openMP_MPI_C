@@ -1,0 +1,89 @@
+number of processes: 1
+--------------------------------------------------------------------------
+mpirun was unable to find the specified executable file, and therefore
+did not launch the job.  This error was first reported for process
+rank 0; it may have occurred for other processes as well.
+
+NOTE: A common cause for this error is misspelling a mpirun command
+      line parameter option (remember that mpirun interprets the first
+      unrecognized command line token as the executable).
+
+Node:       cn01-19
+Executable: ring.x
+--------------------------------------------------------------------------
+ 
+number of processes: 2
+--------------------------------------------------------------------------
+mpirun was unable to find the specified executable file, and therefore
+did not launch the job.  This error was first reported for process
+rank 0; it may have occurred for other processes as well.
+
+NOTE: A common cause for this error is misspelling a mpirun command
+      line parameter option (remember that mpirun interprets the first
+      unrecognized command line token as the executable).
+
+Node:       cn01-19
+Executable: ring.x
+--------------------------------------------------------------------------
+2 total processes failed to start
+ 
+number of processes: 4
+--------------------------------------------------------------------------
+mpirun was unable to find the specified executable file, and therefore
+did not launch the job.  This error was first reported for process
+rank 0; it may have occurred for other processes as well.
+
+NOTE: A common cause for this error is misspelling a mpirun command
+      line parameter option (remember that mpirun interprets the first
+      unrecognized command line token as the executable).
+
+Node:       cn01-19
+Executable: ring.x
+--------------------------------------------------------------------------
+4 total processes failed to start
+ 
+number of processes: 8
+--------------------------------------------------------------------------
+mpirun was unable to find the specified executable file, and therefore
+did not launch the job.  This error was first reported for process
+rank 0; it may have occurred for other processes as well.
+
+NOTE: A common cause for this error is misspelling a mpirun command
+      line parameter option (remember that mpirun interprets the first
+      unrecognized command line token as the executable).
+
+Node:       cn01-19
+Executable: ring.x
+--------------------------------------------------------------------------
+8 total processes failed to start
+ 
+number of processes: 16
+--------------------------------------------------------------------------
+mpirun was unable to find the specified executable file, and therefore
+did not launch the job.  This error was first reported for process
+rank 0; it may have occurred for other processes as well.
+
+NOTE: A common cause for this error is misspelling a mpirun command
+      line parameter option (remember that mpirun interprets the first
+      unrecognized command line token as the executable).
+
+Node:       cn01-19
+Executable: ring.x
+--------------------------------------------------------------------------
+16 total processes failed to start
+ 
+number of processes: 20
+--------------------------------------------------------------------------
+mpirun was unable to find the specified executable file, and therefore
+did not launch the job.  This error was first reported for process
+rank 0; it may have occurred for other processes as well.
+
+NOTE: A common cause for this error is misspelling a mpirun command
+      line parameter option (remember that mpirun interprets the first
+      unrecognized command line token as the executable).
+
+Node:       cn01-19
+Executable: ring.x
+--------------------------------------------------------------------------
+20 total processes failed to start
+ 

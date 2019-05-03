@@ -1,0 +1,7 @@
+The program is not using OMP library, it's actually using . So in order 
+the multithread better version of intel is minimizing a lot the overhead given by mpi messages:
+in multithread approach intel probably minimizes the message passing, so the resources it takes.
+Number fo threads problematic because it's multithreaded compiled.
+What to do: see the role of multithread approach combining np and nthreads. How? We have to compile with -fomp in Makefile
+
+Now we have for 1 core a SUstained performance 27 Gflops, above the TTP: frequency boost
