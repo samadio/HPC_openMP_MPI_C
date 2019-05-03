@@ -1,41 +1,46 @@
 #include <stdio.h>
+#define row 4
+#define col 5
+#define space row*col*sizeof(int)
+#define elements row*col
 
-__global__ void reverse (int* in, int* out){
-    out[blockDim.x-threadIdx.x-1]=in[threadIdx.x];
+__global__ void tranpose (int* A, int*B){
+  int row= gridDim.x;
+  int col= blockDim.x;
+  B[col+row*i]=A[row+col*i]
 }
 
 
 int main() {
-    int d_in[]={100,110,200,220,300};
-    int size = 5* sizeof( int );
-    int* d_out=(int*)malloc(size);
-    int *dev_in, *dev_out;  // device copies 
-    int i;
     
-    // allocate device copies of dev_in/out
-    cudaMalloc( (void**)&dev_in, size );
-    cudaMalloc( (void**)&dev_out, size);
+  int*A=(int*)malloc(space);
+  int* dev_A;
+  int*B=(int*)malloc(space);
+  int* dev_B;
 
-   cudaMemcpy( dev_in, d_in, size, cudaMemcpyHostToDevice ); //send data to device
+  int i;
+  for(i=0;i<elements;i++){
+    A[i]=i;
+  }
 
-    // launch reverse() kernel
-    reverse<<< 1, 5 >>>(dev_in, dev_out); //1 block of size threads
+  // allocate device copies of A and B
+  cudaMalloc( (void*)&dev_A, space );
+  cudaMalloc( (void*)&dev_B, space );
 
-    // copy device result back to host copy of c
-   cudaMemcpy( d_out, dev_out, size,   cudaMemcpyDeviceToHost );
+  cudaMemcpy( dev_A, A, size, cudaMemcpyHostToDevice ); //send data to device
 
-   for(i=0;i<5;i++){
-     printf(" %d ",d_in[i]);
-   }
-   printf("\n");
-           
-   for(i=0;i<5;i++){
-     printf(" %d ",d_out[i]);
-   }
-   printf("\n");	
+  // launch reverse() kernel
+  transpose<<< row, col >>>(dev_A, dev_B);
 
-    free( d_out );
-    cudaFree( dev_in );
-    cudaFree( dev_out );
-    return 0;
+  // copy device result back to host copy of c
+  cudaMemcpy( B, dev_B, size,   cudaMemcpyDeviceToHost );
+
+  for(i=0;i<elements;i++){
+    if(i%col==0 && i!=0)printf("\n");
+    printf("%d ", B[i]);
+  }
+
+  free(A); free(B);
+  cudaFree( dev_A ); cudaFree( dev_B );
+  return 0;
 }
