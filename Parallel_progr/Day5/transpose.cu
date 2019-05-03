@@ -7,7 +7,7 @@
 __global__ void tranpose (int* A, int*B){
   int row= gridDim.x;
   int col= blockDim.x;
-  B[col+row*i]=A[row+col*i]
+  B[col+row*i]=A[row+col*i];
 }
 
 
