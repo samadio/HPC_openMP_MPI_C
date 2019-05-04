@@ -43,7 +43,7 @@ int main() {
   }
   printf("\n");
 
-  for(i=0;i<elements*2;i++){
+  for(i=0;i<elements;i++){
     if(i%row==0 && i!=0)printf("\n");
     printf("%d ", B[i]);
   }
