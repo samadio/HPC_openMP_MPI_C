@@ -5,11 +5,11 @@
 #define elements 4*5
 
 __global__ void transpose (int* A, int*B){
-  int rows=blockIdx.x;
-  int column=threadIdx.x;
-  int col_dim=blockDim.x;
-  int row_dim=gridDim.x;
-  B[column+rows*row_dim]=A[rows+column*col_dim];
+  blockIdx.x;
+  int i=threadIdx.x+blockIdx.x*blockDim.x;
+  int length= (blockDim.x* gridDim.x)-1;
+  int j= i/length+ length*(i%length);
+  B[i]=A[j];
 }
 
 
