@@ -1,0 +1,21 @@
+implement a matrix transpose in shared memory (non cache friendly algorithm). Matrix blocks
+
+-------------------
+| 1 2              |
+| 6 8              |								4 kb<=Nb x Nb x sizeof(type) in CUDA
+|                  |  -> little matrix A' of size Nb x Nb fitting in cache. So u transpose in cache A' and put it in B
+|                  |
+|                  |
+|                  |
+-------------------
+
+1)implement the exercise: fast-transpose in CUDA using shared memory
+2) take matrix of size 8192^2 and register time to solution (table):
+
+
+threads per block		Tranpose Time  Fast Transpose Time
+64
+512
+1024
+
+Data/Time=memory bandwidth, ideally 100 Gbyte/s

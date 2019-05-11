@@ -4,6 +4,7 @@
 #define space 4*5*sizeof(int)
 #define elements 4*5
 
+//this works until col<=Nthreads. In this case every threads moves only 1 data
 __global__ void transpose (int* A, int*B){
   int i=threadIdx.x+(blockIdx.x*blockDim.x);
   int totlength= blockDim.x*gridDim.x-1;
@@ -14,6 +15,13 @@ __global__ void transpose (int* A, int*B){
   B[j]=A[i];
 }
 
+
+/*x=threadidx, y=blockidx
+* while (x<N){        //in case col>Nthreads
+  M_out(y*N+x)=M_in(x*N+y);
+} x+=blockdim.x
+*
+*/
 
 int main() {
     
@@ -34,7 +42,7 @@ int main() {
   cudaMemcpy( dev_A, A, space, cudaMemcpyHostToDevice ); //send data to device
 
   // launch transpose() kernel
-  transpose<<< row, col >>>(dev_A, dev_B);
+  transpose<<< row, col >>>(dev_A, dev_B); 
 
   // copy device result back to host copy of c
   cudaMemcpy( B, dev_B, space,   cudaMemcpyDeviceToHost );
