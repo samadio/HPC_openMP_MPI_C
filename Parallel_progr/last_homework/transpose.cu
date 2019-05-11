@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include<math.h>
+
 #define row 8192
 #define col 8192
 #define space 8192*8192*sizeof(int)
@@ -29,7 +30,6 @@ __global__ void transpose (int** A, int** B,size_t cols){
 __global__ void fast_transpose (int** tableA, int** tableB, const size_t dim){
   __shared__ int miniblockA[blockDim.x];
   __shared__ int miniblockB[blockDim.x];
-  size_t dim= (size_t) sqrt(size);
   if(threadIdx.x==0 && threadIdx.y==0){
     size_t i;  
     for(i=0;i<blockDim.x;i++){
@@ -88,7 +88,7 @@ int main() {
   block.x=dim;
   block.y=dim;
 
-  fast_transpose<<< row*col/th_per_block, th_per_block >>>(dev_tableA, dev_tableB,dim); 
+  fast_transpose<<< grid, block >>>(dev_tableA, dev_tableB,dim); 
 
   // copy device result back to host copy of c
   cudaMemcpy( B, dev_B, space,   cudaMemcpyDeviceToHost );
