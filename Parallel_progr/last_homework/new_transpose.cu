@@ -60,9 +60,18 @@ in main(){
   grid.x=grid.y=N/block_side;  //number of orizontal blocks=number of vertical blocks
   block.x=block.y=block_side;  //block linear length
   
-  fast_transpose<<< grid, block >>>(dev_tableA, dev_tableB,block_side);
+  fast_transpose<<< grid, block >>>(dev_A, dev_B,block_side);
   
+  cudaMemcpy( B, dev_B, space, cudaMemcpyDeviceToHost );
 
-    free(A);free(B);
-    cudaFree(dev_A);cudafree(dev_B);
+  for(i=0;i<elements;i++){
+    if(i%row==0 && i!=0)printf("\n");
+    
+    printf("%d ", B[i]);
+    }
+  printf("\n");
+   
+
+  free(A);free(B);
+  cudaFree(dev_A);cudafree(dev_B);
 }
