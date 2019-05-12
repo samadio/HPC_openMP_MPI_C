@@ -4,11 +4,9 @@
 #define nth 4
 
 __global__ void fast_transpose(size_t* A, size_t* B,size_t dim){
-    __shared__ Ablock[nth];
-    __shared__ Bblock[nth]
+    __shared__ size_t Ablock[nth];
+    __shared__ size_t Bblock[nth];
 
-    size_t length=blockDim.x; //dim of a single block: (nth)
-    
     size_t th=threadIdx.x+threadIdx.y*dim;
     size_t thx=threadIdx.x;
     size_t thy=threadIdx.y;
@@ -36,7 +34,7 @@ __global__ void fast_transpose(size_t* A, size_t* B,size_t dim){
 }
 
 
-in main(){
+int main(){
     size_t elements=80*80;
     size_t space=80*80*sizeof(size_t);
 
@@ -65,7 +63,14 @@ in main(){
   cudaMemcpy( B, dev_B, space, cudaMemcpyDeviceToHost );
 
   for(i=0;i<elements;i++){
-    if(i%row==0 && i!=0)printf("\n");
+     if(i%N==0 && i!=0)printf("\n");  
+     printf("%d ", A[i]);
+  }
+  printf("\n");
+               
+               
+  for(i=0;i<elements;i++){
+    if(i%N==0 && i!=0)printf("\n");
     
     printf("%d ", B[i]);
     }
@@ -73,5 +78,5 @@ in main(){
    
 
   free(A);free(B);
-  cudaFree(dev_A);cudafree(dev_B);
+  cudaFree(dev_A);cudaFree(dev_B);
 }
