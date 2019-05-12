@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include<math.h>
 
-#define row 64
-#define col 64
-#define space 64*64*sizeof(size_t)
-#define elements 64*64
+#define row 128
+#define col 128
+#define space 128*128*sizeof(size_t)
+#define elements 128*128
 
 #define th_per_block 16
 
@@ -61,7 +61,7 @@ int main() {
   
   size_t i;
   for(i=0;i<elements;i++){
-    A[i]=i;
+    A[i]=i%row;
   }
   
   size_t** dev_tableA;
