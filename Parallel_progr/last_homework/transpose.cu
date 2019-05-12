@@ -13,10 +13,9 @@ __global__ void initialize_table (size_t* A, size_t** table, size_t ncol){
   size_t i=blockIdx.x;
   size_t j=threadIdx.x;
   while(i<ncol){
-    table[j+i]=A+i*ncol+j*ncol;
+    table[i*blockDim.x+j]=A+(i*blockDim.x+j)*ncol;
     i+=blockDim.x;
   }
-  //table[i+j*blockDim.x]=A+j*blockDim.x*ncol+i*ncol;
 }
 
 
