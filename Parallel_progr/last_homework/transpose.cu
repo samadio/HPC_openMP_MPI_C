@@ -117,7 +117,7 @@ int main() {
   if(i%col==0 && i!=0)printf("\n");
   printf("%d ", A[i]);
   }
-  printf("\n");
+  printf("\n"); */
   
   for(i=0;i<elements;i++){
   if(i%row==0 && i!=0)printf("\n");
@@ -125,9 +125,9 @@ int main() {
   printf("%d ", B[i]);
   }
   printf("\n");
- */
+ 
 
-  print_is_transpose(mat_array, transp_array, N); 
+  //print_is_transpose(mat_array, transp_array, N); 
   free(A); free(B);
   cudaFree( dev_A ); cudaFree( dev_B ); cudaFree(dev_tableA);cudaFree(dev_tableB);
   return 0;
