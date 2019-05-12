@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include<math.h>
 
-#define row 128
-#define col 128
-#define space 128*128*sizeof(size_t)
-#define elements 128*128
+#define row 8192
+#define col 8192
+#define space 8192*8192*sizeof(size_t)
+#define elements 8192*8192
 
-#define th_per_block 16
+#define th_per_block 1024
 
 ///////////////////CUDA///////////////////
 __global__ void initialize_table (size_t* A, size_t** table, size_t ncol){
@@ -52,7 +52,7 @@ __global__ void fast_transpose (size_t** tableA, size_t** tableB, const size_t d
 
 //////////////////////C utilites
 
-void print_is_transpose(int *mat, int *transp, const size_t n){
+void print_is_transpose(size_t *mat, size_t *transp, const size_t n){
     
   size_t i, j;
   for (i = 0; i < n; ++i){
@@ -60,11 +60,6 @@ for (j = 0; j < n; ++j)
     printf("%d ",(mat[i*n + j] != transp[j*n + i]) ? 0 : 1);
 putchar('\n');
   }
-}
-
-size_t min(size_t a, size_t b){
-  if (a<b) return a;
-  return b;
 }
 
 int main() {
@@ -127,7 +122,7 @@ int main() {
   printf("\n");
  */
 
-  print_is_transpose(mat_array, transp_array, N); 
+  print_is_transpose(A,B, col); 
   free(A); free(B);
   cudaFree( dev_A ); cudaFree( dev_B ); cudaFree(dev_tableA);cudaFree(dev_tableB);
   return 0;
