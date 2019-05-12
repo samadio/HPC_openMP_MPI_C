@@ -10,9 +10,13 @@
 
 ///////////////////CUDA///////////////////
 __global__ void initialize_table (size_t* A, size_t** table, size_t ncol){
-  size_t i=threadIdx.x;
-  size_t j=blockIdx.x;
-  table[i]=A+j*gridDim.x+i*ncol;
+  size_t i=blockIdx.x;
+  size_t j=threadIdx.x;
+  while(i<ncol){
+    table[j+i]=A+i*ncol+j*ncol;
+    i+=blockDim.x;
+  }
+  //table[i+j*blockDim.x]=A+j*blockDim.x*ncol+i*ncol;
 }
 
 
@@ -21,7 +25,7 @@ __global__ void transpose (size_t** A, size_t** B,size_t cols){
   size_t j=threadIdx.x;
   while(i<cols){
     B[j][i]=A[i][j];
-  i+=blockDim.x;
+    i+=blockDim.x;
 }
 
 }
@@ -84,17 +88,11 @@ int main() {
   
   cudaMemcpy( dev_A, A, space, cudaMemcpyHostToDevice ); //send data to device
   
-  if(row<=1024 && col<=1024){
-    initialize_table<<< 1, row >>>(dev_A, dev_tableA,col);
-    initialize_table<<< 1, col >>>(dev_B, dev_tableB,row);  
-  }
-  else{
-    initialize_table<<< elements/th_per_block, th_per_block >>>(dev_A, dev_tableA,col);
-    initialize_table<<< elements/th_per_block, th_per_block >>>(dev_B, dev_tableB,row);
-  }
+  initialize_table<<< (elements/th_per_block), th_per_block >>>(dev_A, dev_tableA,col);
+  initialize_table<<< (elements/th_per_block), th_per_block >>>(dev_B, dev_tableB,row);
   
   // launch transpose() kernel
-  transpose<<< elements/th_per_block, th_per_block >>>(dev_tableA, dev_tableB,col);
+  transpose<<< (elements/th_per_block), th_per_block >>>(dev_tableA, dev_tableB,col);
   
   size_t dim= (size_t)sqrt(th_per_block);
   dim3 grid,block;
@@ -103,7 +101,7 @@ int main() {
   block.x=dim;
   block.y=dim;
   
-  fast_transpose<<< grid, block >>>(dev_tableA, dev_tableB,dim);
+  //fast_transpose<<< grid, block >>>(dev_tableA, dev_tableB,dim);
   
   // copy device result back to host copy of c
   cudaMemcpy( B, dev_B, space, cudaMemcpyDeviceToHost );
@@ -122,11 +120,8 @@ int main() {
   printf("\n");
  
 
-<<<<<<< HEAD
-  print_is_transpose(A,B, col); 
-=======
   //print_is_transpose(mat_array, transp_array, N); 
->>>>>>> 9a442a36d2458910f4b2d0f9c80aaae55e549740
+
   free(A); free(B);
   cudaFree( dev_A ); cudaFree( dev_B ); cudaFree(dev_tableA);cudaFree(dev_tableB);
   return 0;
