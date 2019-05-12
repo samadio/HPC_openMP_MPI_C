@@ -8,10 +8,11 @@
 
 #define th_per_block 16
 
-
+///////////////////CUDA///////////////////
 __global__ void initialize_table (size_t* A, size_t** table, size_t ncol){
   size_t i=threadIdx.x;
-  table[i]=A+i*ncol;
+  size_t j=blockIdx.x;
+  table[i]=A+j*gridDim.x+i*ncol;
 }
 
 
@@ -49,8 +50,22 @@ __global__ void fast_transpose (size_t** tableA, size_t** tableB, const size_t d
 
 }
 
+//////////////////////C utilites
 
+void print_is_transpose(int *mat, int *transp, const size_t n){
+    
+  size_t i, j;
+  for (i = 0; i < n; ++i){
+for (j = 0; j < n; ++j)
+    printf("%d ",(mat[i*n + j] != transp[j*n + i]) ? 0 : 1);
+putchar('\n');
+  }
+}
 
+size_t min(size_t a, size_t b){
+  if (a<b) return a;
+  return b;
+}
 
 int main() {
 
@@ -74,9 +89,14 @@ int main() {
   
   cudaMemcpy( dev_A, A, space, cudaMemcpyHostToDevice ); //send data to device
   
-  initialize_table<<< 1, row >>>(dev_A, dev_tableA,col);
-  initialize_table<<< 1, col >>>(dev_B, dev_tableB,row);
-  
+  if(row<=1024 && col<=1024){
+    initialize_table<<< 1, row >>>(dev_A, dev_tableA,col);
+    initialize_table<<< 1, col >>>(dev_B, dev_tableB,row);  
+  }
+  else{
+    initialize_table<<< elements/th_per_block, th_per_block >>>(dev_A, dev_tableA,col);
+    initialize_table<<< elements/th_per_block, th_per_block >>>(dev_B, dev_tableB,row);
+  }
   
   // launch transpose() kernel
   transpose<<< elements/th_per_block, th_per_block >>>(dev_tableA, dev_tableB,col);
@@ -93,7 +113,7 @@ int main() {
   // copy device result back to host copy of c
   cudaMemcpy( B, dev_B, space, cudaMemcpyDeviceToHost );
   
-  for(i=0;i<elements;i++){
+/*  for(i=0;i<elements;i++){
   if(i%col==0 && i!=0)printf("\n");
   printf("%d ", A[i]);
   }
@@ -105,7 +125,9 @@ int main() {
   printf("%d ", B[i]);
   }
   printf("\n");
-  
+ */
+
+  print_is_transpose(mat_array, transp_array, N); 
   free(A); free(B);
   cudaFree( dev_A ); cudaFree( dev_B ); cudaFree(dev_tableA);cudaFree(dev_tableB);
   return 0;
