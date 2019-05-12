@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include<math.h>
 
-#define row 8192
-#define col 8192
-#define space 8192*8192*sizeof(size_t)
-#define elements 8192*8192
+#define row 80
+#define col 80
+#define space 80*80*sizeof(size_t)
+#define elements 80*80
 
-#define th_per_block 1024
+#define th_per_block 16
 
 ///////////////////CUDA///////////////////
 __global__ void initialize_table (size_t* A, size_t** table, size_t ncol){
@@ -91,7 +91,7 @@ int main() {
   initialize_table<<< (elements/th_per_block), th_per_block >>>(dev_B, dev_tableB,row);
   
   // launch transpose() kernel
-  transpose<<< (elements/th_per_block), th_per_block >>>(dev_tableA, dev_tableB,col);
+  //transpose<<< (elements/th_per_block), th_per_block >>>(dev_tableA, dev_tableB,col);
   
   size_t dim= (size_t)sqrt(th_per_block);
   dim3 grid,block;
@@ -100,16 +100,16 @@ int main() {
   block.x=dim;
   block.y=dim;
   
-  //fast_transpose<<< grid, block >>>(dev_tableA, dev_tableB,dim);
+  fast_transpose<<< grid, block >>>(dev_tableA, dev_tableB,dim);
   
   // copy device result back to host copy of c
   cudaMemcpy( B, dev_B, space, cudaMemcpyDeviceToHost );
   
-/*  for(i=0;i<elements;i++){
+ /*for(i=0;i<elements;i++){
   if(i%col==0 && i!=0)printf("\n");
   printf("%d ", A[i]);
   }
-  printf("\n"); */
+  printf("\n");*/ 
   
   for(i=0;i<elements;i++){
   if(i%row==0 && i!=0)printf("\n");
@@ -119,7 +119,7 @@ int main() {
   printf("\n");
  
 
-  //print_is_transpose(mat_array, transp_array, N); 
+ //print_is_transpose(A,B, row); 
 
   free(A); free(B);
   cudaFree( dev_A ); cudaFree( dev_B ); cudaFree(dev_tableA);cudaFree(dev_tableB);
