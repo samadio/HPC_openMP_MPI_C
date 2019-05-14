@@ -1,0 +1,30 @@
+transp time: 0.002084
+correct? 1
+
+fast times: 0.000065
+correct? 1
+
+transp time: 0.000767
+correct? 1
+
+fast times: 0.000063
+correct? 1
+
+transp time: 0.000773
+correct? 1
+
+fast times: 0.000061
+correct? 1
+
+transp time: 0.000795
+correct? 1
+
+fast times: 0.000061
+correct? 1
+
+transp time: 0.000776
+correct? 1
+
+fast times: 0.000064
+correct? 1
+
