@@ -94,7 +94,7 @@ int main(){
   cudaMemcpy( dev_A, A, space, cudaMemcpyHostToDevice );
 
   double tstart=seconds();
-  transpose<<< row, col >>>(dev_A, dev_B); 
+  transpose<<< elemtns/nth, nth >>>(dev_A, dev_B); 
   double duration=seconds()-tstart;
   printf("transp time: %lf\n",duration);
 
