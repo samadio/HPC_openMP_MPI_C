@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include<sys/time.h>
 #include<math.h>
+
 #define N 8192
 #define nth 512
 
@@ -119,7 +121,7 @@ int main(){
     }
   printf("\n"); */
 
-  printf("correct? %d\n",transposed(A,B));
+  printf("correct? %d\n\n",transposed(A,B));
 
   free(A);free(B);
   cudaFree(dev_A);cudaFree(dev_B);
