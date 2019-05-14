@@ -1,19 +1,22 @@
 #include <stdio.h>
 #include<math.h>
 #define N 8192
-#define nth 1024
+#define nth 512
 
-__global__ void fast_transpose(size_t* A, size_t* B,size_t dim){
+__global__ void fast_transpose(size_t* A, size_t* B){
     __shared__ size_t Ablock[nth];
     __shared__ size_t Bblock[nth];
 
-    //dim=linear dimension of a submatrix block
-    size_t th=threadIdx.x+threadIdx.y*dim;
+    size_t dimx=blockDim.x;
+    size_t dimy=blockDim.y;
+    
+    //dimx=linear dimension in x of a submatrix block
+    size_t th=threadIdx.x+threadIdx.y*dimx;
     size_t thx=threadIdx.x;
     size_t thy=threadIdx.y;
 
-    size_t starty=blockIdx.y*N*dim;
-    size_t startx=blockIdx.x*dim;
+    size_t starty=blockIdx.y*N*dimy;
+    size_t startx=blockIdx.x*dimx;
     size_t start= startx+starty;
     //Ablock is different for every block, so I can index it with th
     Ablock[th]= A[start+thx+(thy)*(N)];
@@ -21,14 +24,14 @@ __global__ void fast_transpose(size_t* A, size_t* B,size_t dim){
     __syncthreads();
 
     //transpose into B block
-    Bblock[dim*thx + thy] = Ablock[th];
+    Bblock[dimy*thx + thy] = Ablock[th];
 
     __syncthreads();
 
 
     //put Bblock in B
-    start=blockIdx.y*dim+dim*N*blockIdx.x; //the x block index of the original matrix becomes y index of transpose, so skip N
-    B[ start+thy+(thx)*(N) ]=Bblock[dim*thx + thy];
+    start=blockIdx.y*dimy+dimx*N*blockIdx.x; //the x block index of the original matrix becomes y index of transpose, so skip N
+    B[ start+thy+(thx)*(N) ]=Bblock[dimy*thx + thy];
 
 }
 
@@ -64,10 +67,18 @@ int main(){
 
   size_t block_side= (size_t)sqrt(nth);
   dim3 grid,block;
-  grid.x=grid.y=N/block_side;  //number of orizontal blocks=number of vertical blocks
-  block.x=block.y=block_side;  //block linear length
+  if(block_side*block_side==nth){
+    grid.x=grid.y=N/block_side;  //number of orizontal blocks=number of vertical blocks
+    block.x=block.y=block_side;  //block linear length
+  }
+  else{
+   grid.x=N/32; //ideally, we should have an algorithm that given nth finds (a,b) integers such that nth=a*b and (a,b) as closest to each other as possible
+   grid.y=N/16; //to be preferred a>b, so that we read more often on x (continous in memory)
+   block.x=32;
+   block.y=16;
+  }
   
-  fast_transpose<<< grid, block >>>(dev_A, dev_B,block_side);
+  fast_transpose<<< grid, block >>>(dev_A, dev_B);
   
   cudaMemcpy( B, dev_B, space, cudaMemcpyDeviceToHost );
 
@@ -78,7 +89,7 @@ int main(){
   printf("\n");*/
                
                
-  printf("%d\n",transposed(A,B));
+//  printf("%d\n",transposed(A,B));
   for(i=0;i<elements;i++){
     if(i%N==0 && i!=0)printf("\n");
     
