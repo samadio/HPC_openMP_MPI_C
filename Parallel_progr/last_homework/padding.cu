@@ -37,7 +37,17 @@ __global__ void fast_transpose(size_t* A, size_t* B){
 
 }
 
+__global__ void transpose(int* A, int *B, const size_t cols){
+  size_t i=blockIdx.x;
+  size_t j=threadIdx.x;
+  while(i<cols){
+    B[j+i*cols]=A[i+j*cols];
+    i+=blockDim.x;
+  }
+  
+}
 
+                                        /////////////////////C utilites//////////////////////////////
 
 int transposed(size_t *A, size_t* At){
   size_t i,j;
@@ -61,8 +71,9 @@ double seconds()
 
 }
 
-////////////////////////////////////main
+                            ////////////////////////////////////main
 int main(){
+  size_t row=col=N;
   size_t elements=N*N;
   size_t space=N*N*sizeof(size_t);
 
@@ -81,6 +92,15 @@ int main(){
 
   cudaMemcpy( dev_A, A, space, cudaMemcpyHostToDevice );
 
+  double tstart=seconds();
+  transpose<<< row, col >>>(dev_A, dev_B); 
+  double duration=seconds()-tstart;
+  printf("transp time: %lf\n",duration);
+
+  cudaMemcpy( B, dev_B, space, cudaMemcpyDeviceToHost );
+
+  printf("correct? %d\n\n",transposed(A,B));
+
   size_t block_side= (size_t)sqrt(nth);
   dim3 grid,block;
   if(block_side*block_side==nth){
@@ -94,16 +114,10 @@ int main(){
     block.y=16;
   }
   
-  double tstart=seconds();
-  fast_transpose<<< grid, block >>>(dev_A, dev_B);
-  double duration=seconds()-tstart;
-  printf("fast time: %lf\n",duration);
-
-  /*
   tstart=seconds();
-  transpose<<< row, col >>>(dev_A, dev_B); 
+  fast_transpose<<< grid, block >>>(dev_A, dev_B);
   duration=seconds()-tstart;
-  printf("transp time: %lf\n",duration);*/
+  printf("fast times: %lf\n",duration);
 
   cudaMemcpy( B, dev_B, space, cudaMemcpyDeviceToHost );
 
