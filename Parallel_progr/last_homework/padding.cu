@@ -3,7 +3,7 @@
 #include<math.h>
 
 #define N 8192
-#define nth 64
+#define nth 1024
 
 __global__ void fast_transpose(size_t* A, size_t* B){
     __shared__ size_t Ablock[nth];
@@ -93,6 +93,7 @@ int main(){
 
   double tstart=seconds();
   transpose<<< N, nth >>>(dev_A, dev_B); 
+  cudaDeviceSynchronize();
   double duration=seconds()-tstart;
   printf("transp time: %lf\n",duration);
 
@@ -115,6 +116,7 @@ int main(){
   
   tstart=seconds();
   fast_transpose<<< grid, block >>>(dev_A, dev_B);
+  cudaDeviceSynchronize();
   duration=seconds()-tstart;
   printf("fast times: %lf\n",duration);
 
