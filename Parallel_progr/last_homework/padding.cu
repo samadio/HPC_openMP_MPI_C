@@ -3,7 +3,7 @@
 #include<math.h>
 
 #define N 8192
-#define nth 512
+#define nth 64
 
 __global__ void fast_transpose(size_t* A, size_t* B){
     __shared__ size_t Ablock[nth];

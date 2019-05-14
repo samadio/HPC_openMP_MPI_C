@@ -1,5 +1,8 @@
 module load cudatoolkit/10.0
 cd /home/samadio/hpc/Parallel_progr/last_homework
-./padding.x >> /home/samadio/hpc/Parallel_progr/last_homework/results_8192_1024.txt
+for tries in 1 2 3 4 5; do
+./padding.x >> /home/samadio/hpc/Parallel_progr/last_homework/results_64.txt
+print " " >> results_64.txt
+done
 
 exit
