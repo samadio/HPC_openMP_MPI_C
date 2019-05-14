@@ -35,6 +35,8 @@ __global__ void fast_transpose(size_t* A, size_t* B){
 
 }
 
+
+
 int transposed(size_t *A, size_t* At){
   size_t i,j;
    for(i=0;i<N;i++){
@@ -45,25 +47,37 @@ int transposed(size_t *A, size_t* At){
    return 1;
 }
 
+double seconds()
 
+{
+
+  struct timeval tmp;
+  double sec;
+  gettimeofday( &tmp, (struct timezone *)0 );
+  sec = tmp.tv_sec + ((double)tmp.tv_usec)/1000000.0;
+  return sec;
+
+}
+
+////////////////////////////////////main
 int main(){
-    size_t elements=N*N;
-    size_t space=N*N*sizeof(size_t);
+  size_t elements=N*N;
+  size_t space=N*N*sizeof(size_t);
 
-    size_t*A=(size_t*)malloc(space);
-    size_t*dev_A;
-    size_t*B=(size_t*)malloc(space);
-    size_t*dev_B;
+  size_t*A=(size_t*)malloc(space);
+  size_t*dev_A;
+  size_t*B=(size_t*)malloc(space);
+  size_t*dev_B;
 
-    size_t i;
-    for(i=0;i<elements;i++){
-        A[i]=i%N;
-    }
+  size_t i;
+  for(i=0;i<elements;i++){
+      A[i]=i%N;
+  }
 
-    cudaMalloc( (void**)&dev_A, space );
-    cudaMalloc( (void**)&dev_B, space );
+  cudaMalloc( (void**)&dev_A, space );
+  cudaMalloc( (void**)&dev_B, space );
 
-    cudaMemcpy( dev_A, A, space, cudaMemcpyHostToDevice );
+  cudaMemcpy( dev_A, A, space, cudaMemcpyHostToDevice );
 
   size_t block_side= (size_t)sqrt(nth);
   dim3 grid,block;
@@ -72,30 +86,40 @@ int main(){
     block.x=block.y=block_side;  //block linear length
   }
   else{
-   grid.x=N/32; //ideally, we should have an algorithm that given nth finds (a,b) integers such that nth=a*b and (a,b) as closest to each other as possible
-   grid.y=N/16; //to be preferred a>b, so that we read more often on x (continous in memory)
-   block.x=32;
-   block.y=16;
+    grid.x=N/32; //ideally, we should have an algorithm that given nth finds (a,b) integers such that nth=a*b and (a,b) closest to each other
+    grid.y=N/16; //to be preferred a>b, so that we read more often on x (continous in memory)
+    block.x=32;
+    block.y=16;
   }
   
+  double tstart=seconds();
   fast_transpose<<< grid, block >>>(dev_A, dev_B);
-  
+  double duration=seconds()-tstart;
+  printf("fast time: %lf\n",duration);
+
+  /*
+  tstart=seconds();
+  transpose<<< row, col >>>(dev_A, dev_B); 
+  duration=seconds()-tstart;
+  printf("transp time: %lf\n",duration);*/
+
   cudaMemcpy( B, dev_B, space, cudaMemcpyDeviceToHost );
 
 /*  for(i=0;i<elements;i++){
      if(i%N==0 && i!=0)printf("\n");  
      printf("%d ", A[i]);
   }
-  printf("\n");*/
+  printf("\n");
                
                
-//  printf("%d\n",transposed(A,B));
   for(i=0;i<elements;i++){
     if(i%N==0 && i!=0)printf("\n");
     
     printf("%d ", B[i]);
     }
-  printf("\n"); 
+  printf("\n"); */
+
+  printf("correct? %d\n",transposed(A,B));
 
   free(A);free(B);
   cudaFree(dev_A);cudaFree(dev_B);
