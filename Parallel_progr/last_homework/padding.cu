@@ -38,8 +38,8 @@ __global__ void fast_transpose(size_t* A, size_t* B){
 }
 
 __global__ void transpose(size_t* A, size_t *B){
-  size_t i=blockIdx.x;
-  size_t j=threadIdx.x;
+  size_t j=blockIdx.x;
+  size_t i=threadIdx.x;
   while(i<N){
     B[j+i*N]=A[i+j*N];
     i+=blockDim.x;
