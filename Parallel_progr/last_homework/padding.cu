@@ -73,8 +73,6 @@ double seconds()
 
                             ////////////////////////////////////main
 int main(){
-  size_t row,col;
-  row=col=N;
   size_t elements=N*N;
   size_t space=N*N*sizeof(size_t);
 
@@ -94,7 +92,7 @@ int main(){
   cudaMemcpy( dev_A, A, space, cudaMemcpyHostToDevice );
 
   double tstart=seconds();
-  transpose<<< elemtns/nth, nth >>>(dev_A, dev_B); 
+  transpose<<< elements/nth, nth >>>(dev_A, dev_B); 
   double duration=seconds()-tstart;
   printf("transp time: %lf\n",duration);
 
