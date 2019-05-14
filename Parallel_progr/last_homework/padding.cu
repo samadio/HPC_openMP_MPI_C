@@ -37,11 +37,11 @@ __global__ void fast_transpose(size_t* A, size_t* B){
 
 }
 
-__global__ void transpose(int* A, int *B, const size_t cols){
+__global__ void transpose(size_t* A, size_t *B){
   size_t i=blockIdx.x;
   size_t j=threadIdx.x;
-  while(i<cols){
-    B[j+i*cols]=A[i+j*cols];
+  while(i<N){
+    B[j+i*N]=A[i+j*N];
     i+=blockDim.x;
   }
   
@@ -73,7 +73,8 @@ double seconds()
 
                             ////////////////////////////////////main
 int main(){
-  size_t row=col=N;
+  size_t row,col;
+  row=col=N;
   size_t elements=N*N;
   size_t space=N*N*sizeof(size_t);
 
